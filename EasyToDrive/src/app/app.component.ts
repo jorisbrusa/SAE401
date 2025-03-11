@@ -9,7 +9,7 @@ import { AccueilComponent } from './component/accueil/accueil.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, MonEspaceConexionComponent, MonEspaceDashboardComponent, AccueilComponent, routes],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MonEspaceConexionComponent, MonEspaceDashboardComponent,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
