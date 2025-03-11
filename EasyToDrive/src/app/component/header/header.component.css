@@ -1,0 +1,89 @@
+/* Reset de base */
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header global */
+  header {
+    background: #ede7f6; /* Violet très clair */
+    border-bottom: 5px solid #d4845c; /* Bordure bas orangée */
+    width: 100%;
+  }
+  
+  /* Conteneur centré */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Logo + texte */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    color: #3b4e9c; /* Bleu */
+    font-size: 1rem;
+  }
+  
+  .logo img {
+    height: 40px; /* Adapter à ton logo */
+  }
+  
+  /* Navigation */
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  /* Liens simples */
+  nav a {
+    text-decoration: none;
+    color: #3b4e9c;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  /* Hover simple */
+  nav a:hover {
+    color: #1a237e;
+  }
+  
+  /* Bouton spécial */
+  nav a.btn {
+    background: #3b4e9c;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background 0.3s;
+  }
+  
+  /* Hover bouton */
+  nav a.btn:hover {
+    background: #1a237e;
+  }
+  
+  /* Active route */
+  nav a.active {
+    text-decoration: underline;
+  }
+  
+  /* Responsive pour mobile */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    nav {
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+  
