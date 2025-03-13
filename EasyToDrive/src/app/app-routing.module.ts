@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MonEspaceSelectionComponent } from './component/mon-espace-selection/mon-espace-selection.component';
-import { AccueilComponent } from './component/accueil/accueil.component';
-import { FaqComponent } from './component/faq/faq.component';
-import { ContactComponent } from './component/contact/contact.component';
 
 const routes: Routes = [
-  { path: 'mon-espace', component: MonEspaceSelectionComponent },
-  { path: 'faq', component: FaqComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'accueil', component: AccueilComponent },
+  { path: 'mon-espace', loadComponent: () => import('./component/mon-espace-selection/mon-espace-selection.component').then(m => m.MonEspaceSelectionComponent) },
+  { path: 'faq', loadComponent: () => import('./component/faq/faq.component').then(m => m.FaqComponent) },
+  { path: 'contact', loadComponent: () => import('./component/contact/contact.component').then(m => m.ContactComponent) },
+  { path: 'accueil', loadComponent: () => import('./component/accueil/accueil.component').then(m => m.AccueilComponent) },
+  { path: 'mon-espace-connexion', loadComponent: () => import('./component/mon-espace-conexion/mon-espace-conexion.component').then(m => m.MonEspaceConexionComponent) },
+  { path: 'mon-espace-connexion-admin', loadComponent: () => import('./component/mon-espace-connexion-admin/mon-espace-connexion-admin.component').then(m => m.MonEspaceConnexionAdminComponent) },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }
 ];
 

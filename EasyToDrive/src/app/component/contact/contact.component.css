@@ -1,0 +1,86 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.content {
+    width: 100%;
+    max-width: 600px;
+}
+
+.card1 {
+    margin-top: 10%;
+    background-color: #336CB4;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.card1 h2 {
+    margin-bottom: 20px;
+}
+
+.card1 p {
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, textarea {
+    resize: none; /* Empêche le redimensionnement manuel */
+    padding: 15px;
+    border: 2px solid transparent; /* Bordure complète transparente pour ne jamais bouger */
+    border-bottom: 3px solid transparent; /* Bordure basse qu'on va animer */
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    transition: border-color 0.3s ease, border-bottom-color 0.3s ease, transform 0.3s ease;
+    background-color: white;
+    color: black;
+    box-sizing: border-box;
+}
+
+input:hover, textarea:hover {
+    border-bottom-color: #EC671C; /* Seulement la bordure du bas en orange */
+    transform: scale(1.02); /* Optionnel : léger zoom pour le style */
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #EC671C; /* Bordure complète orange au focus */
+    border-bottom-color: #EC671C; /* On garde la cohérence avec le bas */
+    transform: scale(1.02); /* On garde le zoom si tu veux */
+}
+
+button {
+    background-color: #EC671C;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #fe701e;
+    transform: scale(1.05);
+}

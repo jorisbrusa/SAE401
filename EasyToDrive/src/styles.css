@@ -4,4 +4,11 @@ body {
     padding: 0;
     margin: 0;
     background-color: #f4f4f4;
+    
 }
+
+
+:root {
+    --header-height: 90px; /* Tu peux changer la taille ici facilement */
+  }
+  

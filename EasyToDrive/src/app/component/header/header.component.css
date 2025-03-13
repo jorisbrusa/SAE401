@@ -1,30 +1,36 @@
 header {
     background-color: #fff;
     color: #326CB4;
-    padding: 20px 0;
+    padding: 10px 0; /* Ajuste la hauteur via padding */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+    /* height: 40px; ENLEVER la hauteur fixe */
+    display: flex; /* Important pour aligner contenu */
+    align-items: center; /* Centre verticalement */
 }
 
 .container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* Bien centré verticalement */
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
 }
 
 .logo {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex: 1;
 }
 
 .logo img {
-    height: 50px;
+    max-height: 40px; /* Logo limité en hauteur, s'adapte au header */
     margin-right: 10px;
 }
 
@@ -36,6 +42,9 @@ header {
 nav {
     display: flex;
     gap: 20px;
+    justify-content: center;
+    flex: 2;
+    align-items: center; /* Centré verticalement */
 }
 
 nav a {
@@ -43,7 +52,7 @@ nav a {
     border-radius: 50px;
     text-decoration: none;
     font-size: 18px;
-    padding: 10px 20px;
+    padding: 8px 16px; /* Padding réduit pour éviter débordement */
     background-color: #fff;
     transition: background-color 0.3s, transform 0.3s, color 0.3s;
     position: relative;
@@ -74,10 +83,11 @@ nav a:hover {
     transform: scale(1.1);
 }
 
+/* Responsive toujours OK */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
     }
 
     nav {

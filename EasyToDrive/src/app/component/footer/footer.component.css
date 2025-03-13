@@ -1,6 +1,6 @@
 footer {
-    background-color: #fff;
-    color: #326CB4;
+    background-color: #336CB4;
+    color: #fefefe;
     text-align: center;
     padding: 20px 0;
     position: relative; /* Changed from fixed to relative */
@@ -20,7 +20,7 @@ main {
 }
 
 footer a {
-    color: #326CB4;
+    color: #ffffff;
     text-decoration: none;
     margin: 0 10px;
 }

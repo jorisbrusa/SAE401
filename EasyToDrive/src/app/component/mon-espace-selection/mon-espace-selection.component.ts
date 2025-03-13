@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-mon-espace-selection',
-  imports: [],
+  standalone: true, // ⚠️ important aussi
+  imports: [RouterModule],
   templateUrl: './mon-espace-selection.component.html',
-  styleUrl: './mon-espace-selection.component.css'
+  styleUrls: ['./mon-espace-selection.component.css'] // ✅ Correction
 })
-export class MonEspaceSelectionComponent {
-
-}
+export class MonEspaceSelectionComponent { }
