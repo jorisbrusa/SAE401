@@ -1,1 +1,100 @@
-<p>mon-espace-conexion works!</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Easy 2 Drive</title>
+    <style>
+        body {
+            background-image: url('background.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #1E5CA8;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: white;
+            width: 350px;
+            height: 500px;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+            margin-right: 20px;
+            
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 20px;
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .checkbox input {
+            width: auto;
+            margin-right: 10px;
+        }
+        .btn {
+            background-color: #FF7F32;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            background-color: #E66A27;
+        }
+        .link {
+            display: block;
+            margin-top: 10px;
+            color: white;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .title{
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Easy 2 Drive" class="logo">
+        <h2 class="title">Je me connecte à easy 2 drive</h2>
+        <div class="input-group">
+            <label for="email">Adresse mail</label>
+            <input type="email" id="email" placeholder="exemple@email.com">
+        </div>
+        <div class="input-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" placeholder="••••••••">
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" id="remember">
+            <label for="remember">Se souvenir de moi</label>
+        </div>
+        <button class="btn">Je me connecte</button>
+        <a href="#" class="link">J'ai oublié mon mot de passe</a>
+    </div>
+</body>
+</html>
