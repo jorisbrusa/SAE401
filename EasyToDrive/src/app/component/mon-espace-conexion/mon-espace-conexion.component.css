@@ -1,5 +1,4 @@
 body {
-    background-image: url('background.jpg');
     background-size: cover;
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
@@ -7,6 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
 .container {
     background-color: #1E5CA8;
@@ -16,16 +16,28 @@ body {
     text-align: center;
     color: white;
     width: 350px;
-    height: 500px;
+    height: auto;
 }
 .logo {
     margin-bottom: 20px;
+}
+.passwords{
+    margin-top: 10px;
+   border: none;
+   border: none; 
+   outline: none; 
+}
+input:focus {
+    border-bottom: 3px solid orange; 
+}
+
+input::placeholder {
+    color: #999;
 }
 .input-group {
     margin-bottom: 20px;
     text-align: left;
     margin-right: 20px;
-    
 }
 input {
     width: 100%;
@@ -52,6 +64,8 @@ input {
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 10px;
+    font-style: regular;
+    font-size: 15px;
 }
 .btn:hover {
     background-color: #E66A27;
@@ -62,9 +76,17 @@ input {
     color: white;
     text-decoration: underline;
     cursor: pointer;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+.link:hover {
+    color: #FF7F32;
 }
 .title{
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 40px;
+}
+.check{
+    margin: 0;
 }
