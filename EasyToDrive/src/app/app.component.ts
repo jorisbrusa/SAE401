@@ -6,10 +6,11 @@ import { routes } from './app.routes';
 import { MonEspaceConexionComponent } from './component/mon-espace-conexion/mon-espace-conexion.component';
 import { MonEspaceDashboardComponent } from './component/mon-espace-dashboard/mon-espace-dashboard.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
+import { MonEspaceSelectionComponent } from './component/mon-espace-selection/mon-espace-selection.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, MonEspaceConexionComponent, MonEspaceDashboardComponent,],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MonEspaceConexionComponent, MonEspaceDashboardComponent, MonEspaceSelectionComponent, AccueilComponent, routes],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

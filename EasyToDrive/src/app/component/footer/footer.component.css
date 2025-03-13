@@ -3,10 +3,20 @@ footer {
     color: #326CB4;
     text-align: center;
     padding: 20px 0;
-    position: fixed;
+    position: relative; /* Changed from fixed to relative */
     bottom: 0;
     width: 100%;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
 }
 
 footer a {
