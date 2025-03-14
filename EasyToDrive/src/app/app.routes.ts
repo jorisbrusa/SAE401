@@ -7,11 +7,11 @@ import { MonEspaceConexionComponent } from './component/mon-espace-conexion/mon-
 import { MonEspaceConnexionAdminComponent } from './component/mon-espace-connexion-admin/mon-espace-connexion-admin.component';
 
 export const routes: Routes = [
-  { path: 'mon-espace', component: MonEspaceSelectionComponent },
-  { path: 'faq', component: FaqComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'accueil', component: AccueilComponent },
-  { path: 'mon-espace-connexion', component: MonEspaceConexionComponent },
-  { path: 'mon-espace-connexion-admin', component: MonEspaceConnexionAdminComponent },
+  { path: 'mon-espace', component: MonEspaceSelectionComponent, data: { animation: 'MonEspacePage' } },
+  { path: 'faq', component: FaqComponent, data: { animation: 'FaqPage' } },
+  { path: 'contact', component: ContactComponent, data: { animation: 'ContactPage' } },
+  { path: 'accueil', component: AccueilComponent, data: { animation: 'AccueilPage' } },
+  { path: 'mon-espace-connexion', component: MonEspaceConexionComponent, data: { animation: 'ConexionPage' } },
+  { path: 'mon-espace-connexion-admin', component: MonEspaceConnexionAdminComponent, data: { animation: 'AdminPage' } },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }
 ];
