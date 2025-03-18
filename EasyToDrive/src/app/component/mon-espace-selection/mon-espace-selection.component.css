@@ -18,46 +18,31 @@
 }
 
 .content {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
     display: flex;
     justify-content: space-around;
     width: 100%;
     flex-grow: 1; /* Permet à .content de prendre tout l'espace restant */
 }
 
-.card1 {
+.card1, .card2 {
     margin-top: 8vw;
-    grid-column: 1 / 1;
     background-color: #4169e1;
     color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
+    width: 45%; /* Adjust the width as needed */
     text-align: center;
-}
-
-.card2 {
-    margin-top: 8vw;
-    grid-column: 2 / 2;
-    background-color: #4169e1;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card1 {
-    height: 100%; /* Adjust the height as needed */
     margin-right: 75px; /* Half of the total spacing */
 }
 
 .card2 {
-    height: 100%; /* Adjust the height as needed */
     margin-left: 75px; /* Half of the total spacing */
 }
 
@@ -84,7 +69,36 @@ a {
 a:hover {
     background-color: #b35917;
 }
+
 p {
-    
     text-align: justify;
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card1, .card2 {
+        width: 90%; /* Largeur plus grande pour bien s'adapter aux écrans mobiles */
+        margin: 20px 0; /* Espacement vertical entre les cartes */
+    }
+
+    .card1 {
+        margin-right: 0;
+    }
+
+    .card2 {
+        margin-left: 0;
+    }
 }
