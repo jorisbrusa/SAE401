@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des élèves - Easy 2 Drive Admin</title>
+    <title>Gestion des élèves</title>
     <link rel="stylesheet" href="./mon-espace-dashboard-admin.component.css">
 </head>
 <body>
     <div class="sidebar">
-        <img src="logo.png" alt="Easy 2 Drive Admin">
-        <div class="menu">Dashboard</div>
+        <div class="logo">
+            <img src="logo.png" alt="Easy 2 Drive Admin">
+        </div>
+        <button class="dashboard-btn">Dashboard</button>
     </div>
+
     <div class="content">
         <div class="header">
             <h2>Gestion des élèves</h2>
-            <button class="btn-add" onclick="openModal()">Ajouter un élève</button>
+            <button (click)="openModal()">Ajouter un élève</button>
         </div>
+
         <div class="table-container">
             <table>
                 <thead>
@@ -26,24 +30,29 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Les lignes des élèves seront ajoutées ici -->
+                <tbody id="studentTableBody">
+                    <!-- Les élèves seront ajoutés ici dynamiquement -->
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <h3>Ajouter un élève</h3>
-            <input type="text" placeholder="Nom" id="nom">
-            <input type="text" placeholder="Prénom" id="prenom">
-            <input type="text" placeholder="NEPH" id="neph">
-            <input type="date" id="date_naissance">
-            <input type="email" placeholder="Adresse mail" id="email">
-            <input type="password" placeholder="Mot de passe" id="password">
-            <button onclick="ajouterEleve()">Valider</button>
+   
+    <div class="container">
+    
+        <div class="modal" *ngIf="isModalOpen">
+            <div class="modal-content">
+                <span (click)="closeModal()" class="close">&times;</span>
+                <h2>Ajouter un élève</h2>
+                <input type="text" id="nom" placeholder="Nom">
+                <input type="text" id="prenom" placeholder="Prénom">
+                <input type="text" id="neph" placeholder="NEPH">
+                <input type="date" id="date_naissance">
+                <input type="email" id="email" placeholder="Adresse mail">
+                <input type="password" id="password" placeholder="Mot de passe">
+                <button (click)="ajouterEleve()">Valider</button>
+            </div>
         </div>
     </div>
-    
+    <script src="./mon-espace-dashboard-admin.component.ts"></script>
 </body>
 </html>
