@@ -1,13 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-mon-espace-conexion',
   templateUrl: './mon-espace-conexion.component.html',
   styleUrls: ['./mon-espace-conexion.component.css']
 })
-export class MonEspaceConexionComponent {
-
+export class MonEspaceConexionComponent implements OnInit {
+  loginForm!: FormGroup;
+  constructor(){}
+  ngOnInit() {
+    this.loginForm = new FormGroup({
+      login: new FormControl("test@test.fr"),
+      mdp: new FormControl("test")
+    });
+  }
+  login() {
+    const login = this.loginForm.get('login')?.value
+    const mdp = this.loginForm.get('mdp')?.value}
+  
+  clear() {
+    this.loginForm.controls['login'].setValue('');
+    this.loginForm.controls['mdp'].setValue('');
+  }
 }
