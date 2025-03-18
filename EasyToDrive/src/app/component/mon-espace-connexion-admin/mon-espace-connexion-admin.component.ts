@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
   templateUrl: './mon-espace-connexion-admin.component.html',
   styleUrl: './mon-espace-connexion-admin.component.css'
 })
-export class MonEspaceConexionComponent implements OnInit {
+export class MonEspaceConnexionAdminComponent implements OnInit {
   loginForm!: FormGroup;
   constructor(){}
   ngOnInit() {
