@@ -1,22 +1,28 @@
 <?php
-header("Content-Type: application/json"); // Renvoyer les données en json
-header("Access-Control-Allow-Origin: *"); // Autoriser les requêtes depuis n'importe quel domaine
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE"); // Autoriser les méthodes GET, POST, PUT, DELETE
-header("Access-Control-Allow-Headers: Content-Type"); // Autoriser le type de contenu application/json
+$DATABASE_URL = getenv('DATABASE_URL'); // Récupérer l'URL depuis les variables d'environnement
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "AutoEcoleDB";
-
-try { // Connexion à la base de données
-    $pdo = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
-} catch (PDOException $e) {
-    die(json_encode(["error" => "Échec de connexion: " . $e->getMessage()]));
+if (!$DATABASE_URL) {
+    die("Erreur : la variable d'environnement DATABASE_URL n'est pas définie.");
 }
+
+// Découper l'URL pour extraire les infos de connexion
+$database = parse_url($DATABASE_URL);
+$host = $database["host"];
+$port = $database["port"]; // Port PostgreSQL
+$dbname = ltrim($database["path"], "/");
+$user = $database["user"];
+$password = $database["pass"];
+
+try {
+    $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
+
+    echo "Connexion réussie à la base de données !";
+} catch (PDOException $e) {
+    echo "Erreur de connexion : " . $e->getMessage();
+}
+
 
 $method = $_SERVER["REQUEST_METHOD"]; // GET, POST, PUT, DELETE
 $input = json_decode(file_get_contents("php://input"), true);
