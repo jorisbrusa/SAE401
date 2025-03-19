@@ -14,10 +14,53 @@
         <h2>ELEVE</h2>
         <button class="btn">Code de la route</button>
         <a href="#">Conduite</a>
+        <!-- Bouton Déconnexion -->
+        <button (click)="logout()" class="btn logout">🚪 Déconnexion</button>
     </div>
     
     <div class="content">
         <h1>Vos statistiques</h1>
-    </div>
+    
+        <div class="notes-container">
+            <h3>📌 <b>Mes Notes</b></h3>
+        
+            <h4>📝 Examens de Code</h4>
+            <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Numéro Examen</th>
+                    <th>Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let note of notesCode">
+                    <td>{{ note.Date }}</td>
+                    <td>{{ note.Numero_Examen }}</td>
+                    <td>{{ note.Note }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            
+              <!-- Examens de Simulation -->
+              <h3>🚗 <strong>Examens de Simulation</strong></h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Numéro Examen</th>
+                    <th>Impression</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let simu of notesSimu">
+                    <td>{{ simu.Date }}</td>
+                    <td>{{ simu.Numero_Examen }}</td>
+                    <td>{{ simu.Impression }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>     
+    </div>    
 </body>
 </html>

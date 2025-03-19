@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-mon-espace-conexion',
@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 export class MonEspaceConexionComponent {
   email: string = '';
   password: string = '';
+
+  loginForm!: FormGroup
 
   constructor(private http: HttpClient, private router: Router) {}
 
