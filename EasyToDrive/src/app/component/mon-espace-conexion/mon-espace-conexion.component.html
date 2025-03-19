@@ -1,29 +1,17 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Easy 2 Drive</title>
-    <link rel="stylesheet" href="./mon-espace-conexion.component.css">
-</head>
-<body>
-    <div class="container">
-        <img src="/EasyToDrive/src/assets/images/favicon-32x32.png" alt="Easy 2 Drive" class="logo">
-        <h2 class="title">Je me connecte à easy 2 drive</h2>
-        <div class="input-group formGroup">
-            <label for="email">Adresse mail</label>
-            <input class="passwords form-control" type="email" id="email" placeholder="exemple@email.com">
-        </div>
-        <div class="input-group formGroup">
-            <label for="password">Mot de passe</label>
-            <input class="passwords form-control" type="password" id="password" placeholder="••••••••">
-        </div>
-        <div class="checkbox">
-            <input class="check" type="checkbox" id="remember">
-            <label for="remember">Se souvenir de moi</label>
-        </div>
-        <button class="btn">Je me connecte</button>
-        <a href="" class="link">J'ai oublié mon mot de passe</a>
+<div class="container">
+    <h2 class="title">Connexion</h2>
+
+    <div class="input-group">
+        <label for="email">Adresse email</label>
+        <input [(ngModel)]="email" type="email" id="email" placeholder="exemple@email.com">
     </div>
-</body>
-</html>
+
+    <div class="input-group">
+        <label for="password">Mot de passe</label>
+        <input [(ngModel)]="password" type="password" id="password" placeholder="••••••••">
+    </div>
+
+    <button (click)="onSubmit()" class="btn">Se connecter</button>
+
+    <a href="#" class="link">J'ai oublié mon mot de passe</a>
+</div>

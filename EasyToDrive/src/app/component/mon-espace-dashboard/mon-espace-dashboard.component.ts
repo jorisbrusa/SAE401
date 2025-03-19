@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-mon-espace-dashboard',
-  imports: [],
-  templateUrl: './mon-espace-dashboard.component.html',
-  styleUrl: './mon-espace-dashboard.component.css'
+  standalone: true,
+  templateUrl: './mon-espace-dashboard.component.html', // ✅ Vérifie que le fichier existe
+  styleUrls: ['./mon-espace-dashboard.component.css']
 })
-export class MonEspaceDashboardComponent {
-
-}
+export class MonEspaceDashboardComponent {} // ✅ S'assurer que la classe est bien exportée

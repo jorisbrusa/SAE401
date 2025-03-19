@@ -8,6 +8,7 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 .container {
     background-color: #336CB4;
     padding: 30px;
@@ -16,45 +17,63 @@ body {
     text-align: center;
     color: white;
     width: 350px;
-    height: auto;
-}
-.logo {
-    margin-bottom: 20px;
-}
-.passwords{
-    margin-top: 10px;
-   border: none;
-   border: none; 
-   outline: none; 
-}
-input:focus {
-    border-bottom: 3px solid #EC671C; 
 }
 
-input::placeholder {
-    color: #999;
+.logo {
+    margin-bottom: 20px;
+    width: 50px; /* Ajustez la taille si nécessaire */
+    height: auto;
 }
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
 .input-group {
     margin-bottom: 20px;
     text-align: left;
-    margin-right: 20px;
 }
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
 input {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: none;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    outline: none;
 }
+
+input:focus {
+    border-bottom: 3px solid #EC671C;
+}
+
+input::placeholder {
+    color: #999;
+}
+
+.passwords {
+    margin-top: 10px;
+}
+
 .checkbox {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
+
 .checkbox input {
     width: auto;
     margin-right: 10px;
 }
+
 .btn {
     background-color: #ff5e00;
     color: white;
@@ -63,30 +82,27 @@ input {
     width: 100%;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 10px;
-    font-style: regular;
     font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
+
 .btn:hover {
     background-color: #EC671C;
 }
+
 .link {
     display: block;
     margin-top: 10px;
     color: white;
-    text-decoration: underline;
-    cursor: pointer;
-    margin-bottom: 10px;
     text-decoration: none;
+    font-size: 14px;
 }
+
 .link:hover {
     color: #EC671C;
 }
-.title{
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 40px;
-}
-.check{
+
+.check {
     margin: 0;
 }

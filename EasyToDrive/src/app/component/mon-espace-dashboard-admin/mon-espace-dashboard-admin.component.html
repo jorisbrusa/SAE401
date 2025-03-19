@@ -17,7 +17,7 @@
     <div class="content">
         <div class="header">
             <h2>Gestion des élèves</h2>
-            <button (click)="openModal()">Ajouter un élève</button>
+            <!--<button (click)="openModal()">Ajouter un élève</button>-->
         </div>
     
         <div class="table-container">
@@ -38,7 +38,7 @@
     </div>
     
     <!-- 🔹 MODAL FORMULAIRE -->
-    <div class="modal" *ngIf="isModalOpen">
+    <!--<div class="modal" *ngIf="isModalOpen">
         <div class="modal-content">
             <span (click)="closeModal()" class="close">&times;</span>
             <h2>Ajouter un élève</h2>
@@ -48,11 +48,11 @@
             <input type="text" [(ngModel)]="neph" placeholder="NEPH">
             <input type="date" [(ngModel)]="dateNaissance">
             <input type="email" [(ngModel)]="email" placeholder="Adresse mail">
-            <input type="password" [(ngModel)]="password" placeholder="Mot de passe">
+            <input type="password"[(ngModel)]="password" placeholder="Mot de passe">
     
-            <button (click)="ajouterEleve()">Valider</button>
+            <button>Valider</button>
         </div>
     </div>
-    <script src="./mon-espace-dashboard-admin.component.ts"></script>
+    <script src="./mon-espace-dashboard-admin.component.ts"></script>-->
 </body>
 </html>
