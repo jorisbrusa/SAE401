@@ -19,7 +19,7 @@
         <div class="header">
             <h2>Gestion des élèves</h2>
             <!--<button (click)="openModal()">Ajouter un élève</button>-->
-            <button class="add-btn" (click)="openModal()">Ajouter un élève</button>
+            <button class="add-btn" (click)="ouvrirModal()">Ajouter un élève</button>
         </div>
     
         <div class="dashboard-container">
@@ -95,7 +95,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>{{ isEditing ? 'Modifier' : 'Ajouter' }} un élève</h2>
-                <span (click)="closeModal()" class="close-btn">&times;</span>
+                <span (click)="fermerModal()" class="close-btn">&times;</span>
             </div>
             
             <input type="text" [(ngModel)]="eleveForm.nom" placeholder="Nom">
@@ -107,6 +107,5 @@
         </div>
 
     </div>
-    <script src="./mon-espace-dashboard-admin.component.ts"></script>-->
 </body>
 </html>

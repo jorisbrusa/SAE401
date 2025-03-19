@@ -22,8 +22,17 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
   isEditing = false;
   eleveForm = { nom: '', prenom: '', neph: '', email: '' };
 
-  private http = inject(HttpClient);
   private router = inject(Router);
+
+  constructor(private http: HttpClient) {}
+
+  ouvrirModal() {
+    this.isModalOpen = true;
+  }
+
+  fermerModal() {
+    this.isModalOpen = false;
+  }
 
   ngOnInit() {
     this.chargerEleves();
@@ -66,22 +75,12 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
     );
   }
 
-  openModal(editMode = false, eleve: any = null) {
-    this.isModalOpen = true;
-    this.isEditing = editMode;
-    this.eleveForm = editMode && eleve ? { ...eleve } : { nom: '', prenom: '', neph: '', email: '' };
-  }
-
-  closeModal() {
-    this.isModalOpen = false;
-  }
-
   validerEleve() {
     const url = this.isEditing ? 'https://test888.alwaysdata.net/modifier_eleve.php' : 'https://test888.alwaysdata.net/ajouter_eleve.php';
     this.http.post(url, this.eleveForm).subscribe(
       () => {
         this.chargerEleves();
-        this.closeModal();
+        this.fermerModal();
       },
       (error) => {
         console.error('Erreur lors de la sauvegarde:', error);
