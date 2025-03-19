@@ -6,7 +6,7 @@ import { ContactComponent } from './component/contact/contact.component';
 import { MonEspaceConexionComponent } from './component/mon-espace-conexion/mon-espace-conexion.component';
 import { MonEspaceConnexionAdminComponent } from './component/mon-espace-connexion-admin/mon-espace-connexion-admin.component';
 import { MonEspaceDashboardComponent } from './component/mon-espace-dashboard/mon-espace-dashboard.component';
-import { monespacedashboardadmincomponent } from './component/mon-espace-dashboard-admin/mon-espace-dashboard-admin.component';
+import { MonEspaceDashboardAdminComponent } from './component/mon-espace-dashboard-admin/mon-espace-dashboard-admin.component'; // ✅ Correction ici
 
 export const routes: Routes = [
   { path: 'mon-espace', component: MonEspaceSelectionComponent, data: { animation: 'MonEspacePage' } },
@@ -15,7 +15,8 @@ export const routes: Routes = [
   { path: 'accueil', component: AccueilComponent, data: { animation: 'AccueilPage' } },
   { path: 'mon-espace-connexion', component: MonEspaceConexionComponent, data: { animation: 'ConexionPage' } },
   { path: 'mon-espace-connexion-admin', component: MonEspaceConnexionAdminComponent, data: { animation: 'AdminPage' } },
-  {path: 'mon-espace-dashboard', component: MonEspaceDashboardComponent, data: { animation: 'DashboardPage' } },
-  {path: 'mon-espace-dashboard-admin', component: monespacedashboardadmincomponent, data: { animation: 'DashboardAdminPage' } },
+  { path: 'mon-espace-dashboard', component: MonEspaceDashboardComponent, data: { animation: 'DashboardPage' } },
+  { path: 'mon-espace-dashboard-admin', component: MonEspaceDashboardAdminComponent, data: { animation: 'DashboardAdminPage' } }, // ✅ Correction ici
+
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }
 ];
