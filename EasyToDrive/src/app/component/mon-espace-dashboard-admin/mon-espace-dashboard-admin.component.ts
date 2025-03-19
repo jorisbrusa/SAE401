@@ -1,57 +1,94 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-mon-espace-dashboard-admin',
-  imports :[CommonModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  providers: [],
   templateUrl: './mon-espace-dashboard-admin.component.html',
   styleUrls: ['./mon-espace-dashboard-admin.component.css']
 })
 export class MonEspaceDashboardAdminComponent implements OnInit {
-  eleves: any[] = [];  // Stocke la liste des élèves
-  selectedEleve: any | null = null;  // Élève sélectionné
-  notesCode: any[] = []; // Notes des examens de code
-  notesSimu: any[] = []; // Résultats des examens de simulation
+  eleves: any[] = [];
+  selectedEleve: any | null = null;
+  notesCode: any[] = [];
+  notesSimu: any[] = [];
+  isModalOpen = false;
+  isEditing = false;
+  eleveForm = { nom: '', prenom: '', neph: '', email: '' };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  private http = inject(HttpClient);
+  private router = inject(Router);
 
   ngOnInit() {
     this.chargerEleves();
   }
 
-  // Fonction pour récupérer la liste des élèves
   chargerEleves() {
-    this.http.get<any[]>('https://test888.alwaysdata.net/obtenir_eleves.php')
-      .subscribe(
-        (data) => {
-          this.eleves = data;
-        },
-        (error) => {
-          console.error('Erreur lors du chargement des élèves:', error);
-        }
-      );
+    this.http.get<any[]>('https://test888.alwaysdata.net/obtenir_eleves.php').subscribe(
+      (data) => {
+        this.eleves = data;
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des élèves:', error);
+      }
+    );
   }
 
-  // Fonction pour afficher les détails d'un élève sélectionné
   afficherDetails(eleve: any) {
     this.selectedEleve = eleve;
 
-    // Récupérer les notes de cet élève
-    this.http.get<any>('https://test888.alwaysdata.net/obtenir_notes_admin.php')
-      .subscribe(
+    // Vérifie si l'élève sélectionné a un ID valide
+    if (!eleve.ID) {
+        console.error("Erreur: L'élève sélectionné n'a pas d'ID.");
+        return;
+    }
+
+    // Ajout de l'ID de l'élève en tant que paramètre dans l'URL
+    const url = `https://test888.alwaysdata.net/obtenir_notes_admin.php?Eleve_ID=${eleve.ID}`;
+
+    this.http.get<any>(url).subscribe(
         (data) => {
-          this.notesCode = data.examen_code.filter((note: any) => note.Eleve_ID === eleve.ID);
-          this.notesSimu = data.examen_simu.filter((simu: any) => simu.Eleve_ID === eleve.ID);
+            console.log("Réponse API pour les notes:", data);
+
+            // Vérification et assignation des notes si elles existent
+            this.notesCode = data.examen_code ? data.examen_code : [];
+            this.notesSimu = data.examen_simu ? data.examen_simu : [];
         },
         (error) => {
-          console.error('Erreur lors du chargement des notes:', error);
+            console.error("Erreur lors du chargement des notes:", error);
         }
-      );
+    );
   }
 
-  // Fonction pour déconnecter l'admin
+  openModal(editMode = false, eleve: any = null) {
+    this.isModalOpen = true;
+    this.isEditing = editMode;
+    this.eleveForm = editMode && eleve ? { ...eleve } : { nom: '', prenom: '', neph: '', email: '' };
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  validerEleve() {
+    const url = this.isEditing ? 'https://test888.alwaysdata.net/modifier_eleve.php' : 'https://test888.alwaysdata.net/ajouter_eleve.php';
+    this.http.post(url, this.eleveForm).subscribe(
+      () => {
+        this.chargerEleves();
+        this.closeModal();
+      },
+      (error) => {
+        console.error('Erreur lors de la sauvegarde:', error);
+      }
+    );
+  }
+
   logout() {
     localStorage.removeItem('admin_id');
     this.router.navigate(['/mon-espace-connexion-admin']);

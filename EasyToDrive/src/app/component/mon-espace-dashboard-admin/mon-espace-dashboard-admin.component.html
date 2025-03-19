@@ -19,7 +19,7 @@
         <div class="header">
             <h2>Gestion des élèves</h2>
             <!--<button (click)="openModal()">Ajouter un élève</button>-->
-            
+            <button class="add-btn" (click)="openModal()">Ajouter un élève</button>
         </div>
     
         <div class="dashboard-container">
@@ -90,21 +90,22 @@
           </div>
     </div>
     
-    <!-- 🔹 MODAL FORMULAIRE -->
-    <!--<div class="modal" *ngIf="isModalOpen">
+        <!-- 🔹 MODAL FORMULAIRE -->
+        <div class="modal" *ngIf="isModalOpen">
         <div class="modal-content">
-            <span (click)="closeModal()" class="close">&times;</span>
-            <h2>Ajouter un élève</h2>
-    
-            <input type="text" [(ngModel)]="nom" placeholder="Nom">
-            <input type="text" [(ngModel)]="prenom" placeholder="Prénom">
-            <input type="text" [(ngModel)]="neph" placeholder="NEPH">
-            <input type="date" [(ngModel)]="dateNaissance">
-            <input type="email" [(ngModel)]="email" placeholder="Adresse mail">
-            <input type="password"[(ngModel)]="password" placeholder="Mot de passe">
-    
-            <button>Valider</button>
+            <div class="modal-header">
+                <h2>{{ isEditing ? 'Modifier' : 'Ajouter' }} un élève</h2>
+                <span (click)="closeModal()" class="close-btn">&times;</span>
+            </div>
+            
+            <input type="text" [(ngModel)]="eleveForm.nom" placeholder="Nom">
+            <input type="text" [(ngModel)]="eleveForm.prenom" placeholder="Prénom">
+            <input type="text" [(ngModel)]="eleveForm.neph" placeholder="NEPH">
+            <input type="email" [(ngModel)]="eleveForm.email" placeholder="Email">
+            
+            <button id="validateButton" (click)="validerEleve()">Valider</button>
         </div>
+
     </div>
     <script src="./mon-espace-dashboard-admin.component.ts"></script>-->
 </body>
