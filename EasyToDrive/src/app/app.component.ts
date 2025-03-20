@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate, query, group } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent], 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [
@@ -33,11 +34,17 @@ import { trigger, transition, style, animate, query, group } from '@angular/anim
     ])
   ]
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'EasyToDrive';
 
-  prepareRoute(outlet: RouterOutlet) {
-    return outlet?.activatedRouteData?.['animation'];
+  @ViewChild(RouterOutlet) outlet!: RouterOutlet; // ✅ Correction
+
+  ngAfterViewInit() {
+    console.log("Router Outlet chargé :", this.outlet);
+  }
+
+  prepareRoute() {
+    return this.outlet?.activatedRouteData?.['animation'] || null;
   }
 
   onActivate() {

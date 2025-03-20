@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mon-espace-dashboard',
@@ -14,7 +15,7 @@ export class MonEspaceDashboardComponent implements OnInit {
   notesSimu: any[] = [];
   eleveID: number = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.eleveID = parseInt(localStorage.getItem('eleveID') || '0', 10);
@@ -42,7 +43,14 @@ export class MonEspaceDashboardComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('eleveID');
-    window.location.href = '/mon-espace';
+    localStorage.removeItem('eleveID'); // ✅ Supprime bien l'ID
+  
+    this.router.navigate(['/mon-espace']).then(() => {
+      window.location.reload(); // 🔄 Recharge pour appliquer AuthGuard immédiatement
+    });
   }
+  
+  
+  
+  
 }

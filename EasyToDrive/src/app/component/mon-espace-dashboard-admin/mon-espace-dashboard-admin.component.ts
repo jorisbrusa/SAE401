@@ -89,7 +89,14 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('admin_id');
-    this.router.navigate(['/mon-espace-connexion-admin']);
+    localStorage.removeItem('adminID'); // ✅ Supprime bien l'ID
+  
+    this.router.navigate(['/mon-espace']).then(() => {
+      window.location.reload(); // 🔄 Recharge pour appliquer AuthGuard immédiatement
+    });
   }
+  
+  
+  
+  
 }
