@@ -71,8 +71,12 @@ button {
     cursor: pointer;
 }
 
+.modal.show {
+    display: flex !important; /* ✅ Force l'affichage */
+}
+
 .modal {
-    display: none;
+    display: flex; /* ✅ Changement ici pour afficher la modale */
     position: fixed;
     top: 0;
     left: 0;
