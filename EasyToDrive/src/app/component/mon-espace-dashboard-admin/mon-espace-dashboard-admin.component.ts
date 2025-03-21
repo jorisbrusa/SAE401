@@ -22,6 +22,7 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
 
   // Formulaire pour ajouter/modifier un élève
   eleveForm = { 
+    ID: null, // Add the ID property
     Nom: '', 
     Prenom: '', 
     NEPH_Email: '', 
@@ -63,7 +64,7 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
     this.isModalOpen = false;
     this.isDetailsModalOpen = false; // Fermer aussi la modal des détails
     // Réinitialisation des champs du formulaire
-    this.eleveForm = { Nom: '', Prenom: '', NEPH_Email: '', Auto_Ecole: '', Jour_inscription: '', code: '' };
+    this.eleveForm = { ID: null, Nom: '', Prenom: '', NEPH_Email: '', Auto_Ecole: '', Jour_inscription: '', code: '' };
     this.isEditing = false;
   }
   
@@ -113,16 +114,23 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
   }
 
   modifierEleve(eleve: any) {
-    console.log("Modification de l'élève:", eleve);
-    this.eleveForm = { 
-        Nom: eleve.Nom, 
-        Prenom: eleve.Prenom, 
-        NEPH_Email: eleve.NEPH_Email, 
-        Auto_Ecole: eleve.Auto_Ecole, 
-        Jour_inscription: eleve.Jour_inscription, 
-        code: eleve.code 
+    console.log("🖊️ Modification de l'élève:", eleve);
+
+    // Pré-remplir le formulaire avec les valeurs de l'élève
+    this.eleveForm = {
+        ID: eleve.ID, // Inclure l'ID pour la modification
+        Nom: eleve.Nom,
+        Prenom: eleve.Prenom,
+        NEPH_Email: eleve.NEPH_Email,
+        Auto_Ecole: eleve.Auto_Ecole,
+        Jour_inscription: eleve.Jour_inscription,
+        code: eleve.code
     };
+
+    // Passer en mode édition
     this.isEditing = true;
+
+    // Ouvrir la modal
     this.ouvrirModal();
 }
 
