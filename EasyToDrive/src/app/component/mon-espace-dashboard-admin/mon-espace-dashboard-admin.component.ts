@@ -137,7 +137,6 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
   supprimerEleve(eleve: any) {
     console.log("Suppression de l'élève:", eleve);
     if (confirm("Êtes-vous sûr de vouloir supprimer cet élève ?")) {
-<<<<<<< HEAD
         const url = 'https://test888.alwaysdata.net/supprimer_eleve.php';
         const options = {
             headers: { 'Content-Type': 'application/json' },
@@ -145,10 +144,6 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
         };
 
         this.http.delete(url, options).subscribe(
-=======
-        const url = `https://test888.alwaysdata.net/supprimer_eleve.php?ID=${eleve.ID}`;
-        this.http.delete(url).subscribe(
->>>>>>> cd78e221204f0fa026b64491093fd25fc845f6df
             (response: any) => {
                 console.log("Réponse du serveur :", response);
                 this.chargerEleves();
