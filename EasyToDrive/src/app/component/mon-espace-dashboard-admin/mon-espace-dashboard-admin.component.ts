@@ -14,17 +14,29 @@ import { FormsModule } from '@angular/forms';
 export class MonEspaceDashboardAdminComponent implements OnInit {
   eleves: any[] = [];
   selectedEleve: any | null = null;
-  notesCode: any[] = [];
-  notesSimu: any[] = [];
-  isModalOpen = false; // ✅ Initialise bien la variable
+  isModalOpen = false;
   isEditing = false;
-  eleveForm = { nom: '', prenom: '', neph: '', email: '' };
+
+  // ✅ Ajout des 6 champs du formulaire
+  eleveForm = { 
+    nom: '', 
+    prenom: '', 
+    neph_email: '', 
+    auto_ecole: '', 
+    jour_inscription: '', 
+    code: '' 
+  };
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.chargerEleves();
   }
+  isCodeVisible = false; // Par défaut, le mot de passe est caché
+
+toggleCodeVisibility() {
+    this.isCodeVisible = !this.isCodeVisible;
+}
 
   chargerEleves() {
     this.http.get<any[]>('https://test888.alwaysdata.net/obtenir_eleves.php').subscribe(
@@ -44,17 +56,19 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
 
   fermerModal() {
     console.log("❌ Modal fermée !");
-    this.isModalOpen = false; // Fermer le modal
-    this.eleveForm = { nom: '', prenom: '', neph: '', email: '' }; // Réinitialiser le formulaire
+    this.isModalOpen = false;
+    // ✅ Réinitialisation des champs du formulaire
+    this.eleveForm = { nom: '', prenom: '', neph_email: '', auto_ecole: '', jour_inscription: '', code: '' };
+    this.isEditing = false;
   }
 
   validerEleve() {
     console.log("🔹 Envoi du formulaire :", this.eleveForm);
-  
+
     const url = this.isEditing
       ? 'https://test888.alwaysdata.net/modifier_eleve.php'
       : 'https://test888.alwaysdata.net/ajouter_eleve.php';
-  
+
     this.http.post(url, this.eleveForm).subscribe(
       (response) => {
         console.log("✅ Réponse du serveur :", response);
@@ -66,18 +80,21 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
       }
     );
   }
+
   afficherDetails(eleve: any) {
     console.log("🧐 Détails de l'élève:", eleve);
     this.selectedEleve = eleve;
-    this.ouvrirModal(); // Ouvre la modale avec les détails
+    this.ouvrirModal(); 
     this.eleveForm = { 
         nom: eleve.Nom, 
         prenom: eleve.Prenom, 
-        neph: eleve.NEPH_Email, 
-        email: '' // Ajoute un champ email si besoin
+        neph_email: eleve.NEPH_Email, 
+        auto_ecole: eleve.Auto_Ecole, 
+        jour_inscription: eleve.Jour_inscription, 
+        code: eleve.code 
     };
-    this.isEditing = true; // Mode édition activé
-}
+    this.isEditing = true; 
+  }
 
   logout() {
     localStorage.removeItem('adminID');

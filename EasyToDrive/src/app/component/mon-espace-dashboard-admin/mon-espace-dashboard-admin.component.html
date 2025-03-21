@@ -47,19 +47,23 @@
         </div>
     </div>
     
-    <!-- 🔹 MODAL FORMULAIRE -->
-    <div class="modal" *ngIf="isModalOpen"> <!-- ✅ La modale s'affiche bien avec ngIf -->
+    <div class="modal" *ngIf="isModalOpen">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>{{ isEditing ? 'Modifier' : 'Ajouter' }} un élève</h2>
                 <span (click)="fermerModal()" class="close-btn">&times;</span>
             </div>
-            
+    
             <input type="text" [(ngModel)]="eleveForm.nom" placeholder="Nom">
             <input type="text" [(ngModel)]="eleveForm.prenom" placeholder="Prénom">
-            <input type="text" [(ngModel)]="eleveForm.neph" placeholder="NEPH">
-            <input type="email" [(ngModel)]="eleveForm.email" placeholder="Email">
-            
+            <input type="text" [(ngModel)]="eleveForm.neph_email" placeholder="NEPH_Email">
+            <input type="text" [(ngModel)]="eleveForm.auto_ecole" placeholder="Auto-école">
+            <input type="date" [(ngModel)]="eleveForm.jour_inscription" placeholder="Jour d'inscription">
+            <div class="code-container">
+                <input [type]="isCodeVisible ? 'text' : 'password'" [(ngModel)]="eleveForm.code" placeholder="Code">
+                <button type="button" (click)="toggleCodeVisibility()">👁</button>
+            </div>
+    
             <button id="validateButton" (click)="validerEleve()">Valider</button>
         </div>
     </div>
