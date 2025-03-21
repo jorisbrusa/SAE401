@@ -97,6 +97,7 @@ th {
 }
 
 .logout-button {
+    margin-bottom: 100px;
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
@@ -109,4 +110,25 @@ th {
 
 .logout-button:hover {
     background: #c9302c;
+}
+
+
+.menu {
+    flex-grow: 1; /* Prend tout l'espace disponible et pousse le bouton vers le bas */
+}
+
+
+button {
+    border-radius: 15px;
+    transition: transform 0.2s ease-in-out;
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(1, 78, 1);
+    transform: scale(1.1);
 }

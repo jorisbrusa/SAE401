@@ -1,12 +1,20 @@
-body {
-    background-size: cover;
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+:host { 
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    height: 100vh; 
+    width: 100vw; 
+}
+
+body {
+    height: 100%;
+    margin: 0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
 }
 
 .container {
@@ -16,12 +24,13 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     color: white;
-    width: 350px;
+    max-width: 350px; 
+    min-width: 350px; 
 }
 
 .logo {
     margin-bottom: 20px;
-    width: 50px; /* Ajustez la taille si nécessaire */
+    width: 50px; 
     height: auto;
 }
 
@@ -32,23 +41,28 @@ body {
 }
 
 .input-group {
-    margin-bottom: 20px;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    margin-bottom: 15px;
 }
 
 label {
-    display: block;
-    margin-bottom: 5px;
+    width: 90%;
+    text-align: left;
     font-size: 14px;
+    margin-bottom: 5px;
 }
 
 input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     border-radius: 5px;
     border: none;
-    margin-bottom: 10px;
     outline: none;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
 input:focus {
@@ -78,17 +92,19 @@ input::placeholder {
     background-color: #ff5e00;
     color: white;
     border: none;
-    padding: 10px;
-    width: 100%;
+    padding: 12px;
+    width: 90%;
     border-radius: 5px;
     cursor: pointer;
     font-size: 15px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    transition: transform 0.2s ease-in-out;
 }
 
 .btn:hover {
     background-color: #EC671C;
+    transform: scale(1.05);
 }
 
 .link {

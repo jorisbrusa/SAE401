@@ -8,11 +8,14 @@
 </head>
 <body>
     <div class="sidebar">
-        <div class="logo">
-            <img src="logo.png" alt="Easy 2 Drive Admin">
+        <div class="logo" style="margin-left: auto; margin-right: auto;">
+            <img src="logo.png" alt="Easy 2 Drive">
         </div>
-        <button class="dashboard-btn">Dashboard</button>
-        <button class="logout-btn" (click)="logout()">🚪 Déconnexion</button>
+        <div class="menu">
+        <h2>ADMIN</h2>
+        </div>
+        <!-- Bouton Déconnexion -->
+        <button (click)="logout()" class="logout-button">🚪 Déconnexion</button>
     </div>
 
     <div class="content">
