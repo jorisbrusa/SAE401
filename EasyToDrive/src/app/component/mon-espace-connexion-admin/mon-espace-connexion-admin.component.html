@@ -16,7 +16,7 @@
             <label>Mot de passe :</label>
             <input type="password" [(ngModel)]="MDP" name="MDP" required>
     
-            <button type="submit" [disabled]="adminForm.invalid">Se connecter</button>
+            <button type="submit" [disabled]="adminForm.invalid" class="btn">Se connecter</button>
         </form>
     
         <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>

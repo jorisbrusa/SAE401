@@ -1,3 +1,11 @@
+:host { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw; 
+}
+
 body {
     background-size: cover;
     font-family: Arial, sans-serif;
@@ -7,27 +15,30 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 .login-container {
     background-color: #f2752c;
     padding: 30px;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     color: white;
     width: 350px;
+    max-width: 350px;
+    min-width: 350px;
     height: auto;
 }
+
 .logo {
     margin-bottom: 20px;
 }
-.passwords{
+
+.passwords {
     margin-top: 10px;
-   border: none;
-   border: none; 
-   outline: none; 
+    border: none;
+    outline: none; 
 }
+
 input:focus {
     border-bottom: 3px solid #336CB4; 
 }
@@ -35,59 +46,81 @@ input:focus {
 input::placeholder {
     color: #999;
 }
+
 .input-group {
-    margin-bottom: 20px;
-    text-align: left;
-    margin-right: 20px;
-}
-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+    margin-bottom: 20px;
+}
+
+label {
+    width: 90%;
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 90%;
     padding: 10px;
     border-radius: 5px;
     border: none;
     margin-bottom: 20px;
+    font-size: 16px;
+    box-sizing: border-box;
 }
+
 .checkbox {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
+
 .checkbox input {
     width: auto;
     margin-right: 10px;
 }
+
 .btn {
-    background-color: #336CB4;
+    background-color: #2B6CB0;
     color: white;
     border: none;
     padding: 10px;
-    width: 100%;
+    width: 90%;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 10px;
-    font-style: regular;
     font-size: 15px;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: transform 0.2s ease-in-out;
 }
+
 .btn:hover {
-    background-color: #0055bd;
+    background-color: #193e67;
+    transform: scale(1.05);
 }
+
 .link {
     display: block;
     margin-top: 10px;
     color: white;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
     margin-bottom: 10px;
-    text-decoration: none;
 }
+
 .link:hover {
     color: #EC671C;
 }
-.title{
+
+.title {
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 40px;
 }
-.check{
+
+.check {
     margin: 0;
 }

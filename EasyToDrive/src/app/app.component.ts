@@ -55,7 +55,10 @@ export class AppComponent implements AfterViewInit {
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
-      this.hideHeader = this.router.url.includes('/mon-espace-dashboard-admin'); // Remplace "/ta-page" par le chemin exact
+      const hiddenPages = ['/mon-espace-dashboard-admin', '/mon-espace-dashboard']; // Liste des pages où cacher le header
+      this.hideHeader = hiddenPages.some(path => this.router.url.includes(path));
     });
   }
+
+
 }
