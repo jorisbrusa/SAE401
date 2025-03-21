@@ -26,31 +26,32 @@
     
         <div class="dashboard-container">
             <h1>Gestion des élèves</h1>
-
             <table>
-            <thead>
-                <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>NEPH</th>
-                <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let eleve of eleves">
-                <td>{{ eleve.Nom }}</td>
-                <td>{{ eleve.Prenom }}</td>
-                <td>{{ eleve.NEPH_Email }}</td>
-                <td>
-                    <button (click)="afficherDetails(eleve, $event)">Voir détails</button>
-                </td>
-                </tr>
-            </tbody>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>NEPH</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let eleve of eleves">
+                        <td>{{ eleve.Nom }}</td>
+                        <td>{{ eleve.Prenom }}</td>
+                        <td>{{ eleve.NEPH_Email }}</td>
+                        <td>
+                            <button (click)="afficherDetails(eleve, $event)">Voir détails</button>
+                            <button (click)="modifierEleve(eleve)">Modifier</button>
+                            <button (click)="supprimerEleve(eleve)">Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
-        </div>
-    </div>
-    
-    <!-- Modal pour ajouter/modifier un élève -->
+        </div> 
+    </div> 
+
+  
     <div class="modal" *ngIf="isModalOpen">
         <div class="modal-content">
             <div class="modal-header">
@@ -58,28 +59,25 @@
                 <span (click)="fermerModal()" class="close-btn">&times;</span>
             </div>
     
-            <input type="text" [(ngModel)]="eleveForm.nom" placeholder="Nom">
-            <input type="text" [(ngModel)]="eleveForm.prenom" placeholder="Prénom">
-            <input type="text" [(ngModel)]="eleveForm.neph_email" placeholder="NEPH_Email">
-            <input type="text" [(ngModel)]="eleveForm.auto_ecole" placeholder="Auto-école">
-            <input type="date" [(ngModel)]="eleveForm.jour_inscription" placeholder="Jour d'inscription">
-            <div class="code-container">
-                <input [type]="isCodeVisible ? 'text' : 'password'" [(ngModel)]="eleveForm.code" placeholder="Code">
-                <button type="button" (click)="toggleCodeVisibility()">👁</button>
-            </div>
+            <input type="text" [(ngModel)]="eleveForm.Nom" placeholder="Nom" required>
+            <input type="text" [(ngModel)]="eleveForm.Prenom" placeholder="Prénom" required>
+            <input type="text" [(ngModel)]="eleveForm.NEPH_Email" placeholder="NEPH Email" required>
+            <input type="text" [(ngModel)]="eleveForm.Auto_Ecole" placeholder="Auto-école" required>
+            <input type="date" [(ngModel)]="eleveForm.Jour_inscription" placeholder="Jour d'inscription" required>
+            <input [type]="isCodeVisible ? 'text' : 'password'" [(ngModel)]="eleveForm.code" placeholder="Code" required>
     
             <button id="validateButton" (click)="validerEleve()">Valider</button>
         </div>
     </div>
 
-    <!-- Modal pour afficher les détails de l'élève -->
+   
     <div class="modal2" *ngIf="isDetailsModalOpen" style="overflow: auto;">
         <div class="modal-content2">
             <div class="modal-header">
                 <h2>Détails de l'élève</h2>
                 <span (click)="fermerModal()" class="close-btn">&times;</span>
             </div>
-    
+            
             <div *ngIf="eleveSelectionne">
                 <p><strong>Nom:</strong> {{ eleveSelectionne.Nom }}</p>
                 <p><strong>Prénom:</strong> {{ eleveSelectionne.Prenom }}</p>
@@ -88,7 +86,7 @@
                 <p><strong>Jour d'inscription:</strong> {{ eleveSelectionne.Jour_inscription }}</p>
                 <p><strong>Code:</strong> {{ eleveSelectionne.code }}</p>
 
-                <!-- Afficher les notes de l'élève -->
+                
                 <h3>📝 Examens de Code</h3>
                 <table>
                     <thead>
