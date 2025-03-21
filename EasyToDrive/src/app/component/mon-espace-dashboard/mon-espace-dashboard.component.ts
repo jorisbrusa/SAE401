@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartData, ChartOptions } from 'chart.js';
-import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-mon-espace-dashboard',
   standalone: true,
-  imports: [CommonModule, NgIf, NgFor, NgChartsModule],
+  imports: [CommonModule, NgChartsModule],
   templateUrl: './mon-espace-dashboard.component.html',
   styleUrls: ['./mon-espace-dashboard.component.css'],
 })
@@ -18,16 +17,35 @@ export class MonEspaceDashboardComponent implements OnInit {
   notesSimu: any[] = [];
   eleveID: number = 0;
 
+  // Graphique en barres pour les examens de code
   barChartData: ChartData<'bar'> = {
     labels: [],
-    datasets: []
+    datasets: [
+      { data: [], label: 'Examens de code' }
+    ],
   };
 
   barChartOptions: ChartOptions<'bar'> = {
     responsive: true,
     plugins: {
       legend: { position: 'top' },
-      title: { display: true, text: 'Notes des examens (Code & Simulation)' },
+      title: { display: true, text: 'Notes des examens de code' },
+    },
+  };
+
+  // Graphique en camembert pour les impressions des examens de simulation
+  pieChartData: ChartData<'pie'> = {
+    labels: [],
+    datasets: [
+      { data: [] }
+    ],
+  };
+
+  pieChartOptions: ChartOptions<'pie'> = {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      title: { display: true, text: 'Répartition des impressions des examens de simulation' },
     },
   };
 
@@ -44,6 +62,7 @@ export class MonEspaceDashboardComponent implements OnInit {
       .get<any>(`https://test888.alwaysdata.net/obtenir_notes.php?Eleve_ID=${this.eleveID}`)
       .subscribe({
         next: (data) => {
+          console.log('Données reçues:', data);
           this.notesCode = Array.isArray(data.examen_code) ? data.examen_code : [];
           this.notesSimu = Array.isArray(data.examen_simu) ? data.examen_simu : [];
           this.updateChartData();
@@ -53,31 +72,42 @@ export class MonEspaceDashboardComponent implements OnInit {
   }
 
   updateChartData() {
-    const maxExamens = Math.max(this.notesCode.length, this.notesSimu.length);
-    const labels = Array.from({ length: maxExamens }, (_, i) => `Examen ${i + 1}`);
-
-    const codeNotes = this.notesCode.map(n => parseFloat(n.Note));
-    const simuNotes = this.notesSimu.map(n => parseFloat(n.Impression));
+    // Graphique en barres pour les notes de code
+    const labelsCode = this.notesCode.map((note, i) => `Examen ${i + 1}`);
+    const dataCode = this.notesCode.map((note) => parseFloat(note.Note));
 
     this.barChartData = {
-      labels,
+      labels: labelsCode,
       datasets: [
-        {
-          data: codeNotes,
-          label: 'Code',
-          backgroundColor: 'rgba(54, 162, 235, 0.6)',
-        },
-        {
-          data: simuNotes,
-          label: 'Simulation',
-          backgroundColor: 'rgba(255, 99, 132, 0.6)',
-        }
-      ]
+        { data: dataCode, label: 'Code' }
+      ],
     };
-  }
+
+    // Graphique en camembert pour les impressions des examens de simulation
+    const impressions = this.notesSimu
+      .map((exam) => exam.Impression) // Accédez à la propriété "Impression"
+      .filter((imp) => imp !== undefined && imp !== null); // Filtrez les valeurs undefined/null
+
+    const impressionCounts: { [key: string]: number } = {};
+    
+    impressions.forEach((imp) => {
+      impressionCounts[imp] = (impressionCounts[imp] || 0) + 1;
+    });
+
+    console.log('Impression Counts:', impressionCounts); // Vérifiez les données dans la console
+    console.log('Labels:', Object.keys(impressionCounts)); // Vérifiez les labels
+    console.log('Data:', Object.values(impressionCounts)); // Vérifiez les données
+
+    this.pieChartData = {
+      labels: Object.keys(impressionCounts),
+      datasets: [{ data: Object.values(impressionCounts) }],
+    };
+}
 
   logout() {
     localStorage.removeItem('eleveID');
-    this.router.navigate(['/mon-espace']).then(() => window.location.reload());
+    this.router.navigate(['/mon-espace']).then(() => {
+      window.location.reload();
+    });
   }
 }
