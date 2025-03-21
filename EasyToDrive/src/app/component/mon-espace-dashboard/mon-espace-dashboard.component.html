@@ -1,66 +1,66 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easy 2 Drive</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="sidebar">
-        <div class="logo">
-            <img src="logo.png" alt="Easy 2 Drive">
-        </div>
-        <h2>ELEVE</h2>
-        <button class="btn">Code de la route</button>
-        <a href="#">Conduite</a>
-        <!-- Bouton Déconnexion -->
-        <button (click)="logout()" class="btn logout">🚪 Déconnexion</button>
+<div class="sidebar">
+    <div class="logo">
+        <img src="logo.png" alt="Easy 2 Drive">
     </div>
+    <h2>ELEVE</h2>
+    <button class="btn">Code de la route</button>
+    <a href="#">Conduite</a>
+    <!-- Bouton Déconnexion -->
+    <button (click)="logout()" class="btn logout">🚪 Déconnexion</button>
+</div>
+
+<div class="content">
+    <h1>Vos statistiques</h1>
+
+    <div class="notes-container">
+        <h3>📌 <b>Mes Notes</b></h3>
     
-    <div class="content">
-        <h1>Vos statistiques</h1>
-    
-        <div class="notes-container">
-            <h3>📌 <b>Mes Notes</b></h3>
+        <h4>📝 Examens de Code</h4>
+        <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Numéro Examen</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let note of notesCode">
+                <td>{{ note.Date }}</td>
+                <td>{{ note.Numero_Examen }}</td>
+                <td>{{ note.Note }}</td>
+              </tr>
+            </tbody>
+          </table>
         
-            <h4>📝 Examens de Code</h4>
-            <table>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Numéro Examen</th>
-                    <th>Note</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let note of notesCode">
-                    <td>{{ note.Date }}</td>
-                    <td>{{ note.Numero_Examen }}</td>
-                    <td>{{ note.Note }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            
-              <!-- Examens de Simulation -->
-              <h3>🚗 <strong>Examens de Simulation</strong></h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Numéro Examen</th>
-                    <th>Impression</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let simu of notesSimu">
-                    <td>{{ simu.Date }}</td>
-                    <td>{{ simu.Numero_Examen }}</td>
-                    <td>{{ simu.Impression }}</td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>     
+          <!-- Examens de Simulation -->
+          <h3>🚗 <strong>Examens de Simulation</strong></h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Numéro Examen</th>
+                <th>Impression</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let simu of notesSimu">
+                <td>{{ simu.Date }}</td>
+                <td>{{ simu.Numero_Examen }}</td>
+                <td>{{ simu.Impression }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <!-- Graphique -->
+          <div class="dashboard-container">
+            <h3>📊 <strong>Graphique des Notes</strong></h3>
+            <canvas baseChart
+              [data]="barChartData"
+              [options]="barChartOptions"
+              [type]="'bar'">
+            </canvas>
+          </div> 
     </div>    
-</body>
-</html>
+</div>
