@@ -126,21 +126,27 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
     this.ouvrirModal();
 }
 
-supprimerEleve(eleve: any) {
+  supprimerEleve(eleve: any) {
     console.log("Suppression de l'élève:", eleve);
     if (confirm("Êtes-vous sûr de vouloir supprimer cet élève ?")) {
-        const url = `https://test888.alwaysdata.net/supprimer_eleve.php?id=${eleve.ID}`;
-        this.http.delete(url).subscribe(
+        const url = 'https://test888.alwaysdata.net/supprimer_eleve.php';
+        const options = {
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: eleve.ID })
+        };
+
+        this.http.delete(url, options).subscribe(
             (response: any) => {
                 console.log("Réponse du serveur :", response);
-                this.chargerEleves(); // Recharger la liste des élèves après suppression
+                this.chargerEleves();
             },
             (error: any) => {
                 console.error("Erreur lors de la suppression :", error);
             }
         );
     }
-}
+  }
+
 
   logout() {
     localStorage.removeItem('adminID');

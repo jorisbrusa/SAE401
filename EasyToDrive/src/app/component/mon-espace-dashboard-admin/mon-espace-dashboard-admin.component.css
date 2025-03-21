@@ -68,6 +68,7 @@ th, td {
 }
 
 button {
+    padding: 16px;
     border-radius: 15px;
     transition: transform 0.2s ease-in-out;
     background-color: green;
@@ -75,7 +76,13 @@ button {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
+    margin-right: 10px; /* Ajoute un espace entre les boutons */
 }
+
+button:last-child {
+    margin-right: 0; /* Évite un espace après le dernier bouton */
+}
+
 
 button:hover {
     background-color: rgb(1, 78, 1);
@@ -157,7 +164,7 @@ input {
     background-color: #28a745;
 }
 
-.logout-button {
+.logout-btn {
     margin-bottom: 100px;
     display: block;
     margin: 20px auto;
@@ -169,7 +176,7 @@ input {
     border-radius: 5px;
 }
 
-.logout-button:hover {
+.logout-btn:hover {
     background: #c9302c;
 }
 
