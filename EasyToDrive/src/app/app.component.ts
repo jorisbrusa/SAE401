@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { CommonModule } from '@angular/common';
@@ -49,5 +49,13 @@ export class AppComponent implements AfterViewInit {
 
   onActivate() {
     window.scroll(0, 0);
+  }
+
+  hideHeader: boolean = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.hideHeader = this.router.url.includes('/mon-espace-dashboard-admin'); // Remplace "/ta-page" par le chemin exact
+    });
   }
 }

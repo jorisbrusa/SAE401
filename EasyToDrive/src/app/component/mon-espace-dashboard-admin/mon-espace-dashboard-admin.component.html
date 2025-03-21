@@ -39,7 +39,7 @@
                 <td>{{ eleve.Prenom }}</td>
                 <td>{{ eleve.NEPH_Email }}</td>
                 <td>
-                    <button (click)="afficherDetails(eleve)">Voir détails</button>
+                    <button (click)="afficherDetails(eleve, $event)">Voir détails</button>
                 </td>
                 </tr>
             </tbody>
@@ -47,6 +47,7 @@
         </div>
     </div>
     
+    <!-- Modal pour ajouter/modifier un élève -->
     <div class="modal" *ngIf="isModalOpen">
         <div class="modal-content">
             <div class="modal-header">
@@ -65,6 +66,62 @@
             </div>
     
             <button id="validateButton" (click)="validerEleve()">Valider</button>
+        </div>
+    </div>
+
+    <!-- Modal pour afficher les détails de l'élève -->
+    <div class="modal2" *ngIf="isDetailsModalOpen" style="overflow: auto;">
+        <div class="modal-content2">
+            <div class="modal-header">
+                <h2>Détails de l'élève</h2>
+                <span (click)="fermerModal()" class="close-btn">&times;</span>
+            </div>
+    
+            <div *ngIf="eleveSelectionne">
+                <p><strong>Nom:</strong> {{ eleveSelectionne.Nom }}</p>
+                <p><strong>Prénom:</strong> {{ eleveSelectionne.Prenom }}</p>
+                <p><strong>NEPH/Email:</strong> {{ eleveSelectionne.NEPH_Email }}</p>
+                <p><strong>Auto-école:</strong> {{ eleveSelectionne.Auto_Ecole }}</p>
+                <p><strong>Jour d'inscription:</strong> {{ eleveSelectionne.Jour_inscription }}</p>
+                <p><strong>Code:</strong> {{ eleveSelectionne.code }}</p>
+
+                <!-- Afficher les notes de l'élève -->
+                <h3>📝 Examens de Code</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Numéro Examen</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let note of notesEleve.examen_code">
+                            <td>{{ note.Date }}</td>
+                            <td>{{ note.Numero_Examen }}</td>
+                            <td>{{ note.Note }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>🚗 Examens de Simulation</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Numéro Examen</th>
+                            <th>Impression</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let simu of notesEleve.examen_simu">
+                            <td>{{ simu.Date }}</td>
+                            <td>{{ simu.Numero_Examen }}</td>
+                            <td>{{ simu.Impression }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

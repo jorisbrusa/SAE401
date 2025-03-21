@@ -15,6 +15,10 @@ body {
     width: 100%;
 }
 
+.header {
+    display: none;
+}
+
 .dashboard-btn {
     width: 100%;
     background-color: #E76F51;
@@ -72,11 +76,11 @@ button {
 }
 
 .modal.show {
-    display: flex !important; /* ✅ Force l'affichage */
+    display: flex !important; 
 }
 
 .modal {
-    display: flex; /* ✅ Changement ici pour afficher la modale */
+    display: flex; 
     position: fixed;
     top: 0;
     left: 0;
@@ -95,6 +99,32 @@ button {
     color: white;
     position: relative;
 }
+
+.modal2 { 
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content2 {
+    background: #1E50A2;
+    padding: 25px;
+    border-radius: 10px;
+    width: 65%;
+    max-width: 800px; 
+    max-height: 85vh;
+    overflow-y: auto;
+    color: white;
+    position: relative;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Ajoute une ombre */
+}
+
 
 .modal-header {
     display: flex;
@@ -119,3 +149,5 @@ input {
 #validateButton {
     background-color: #28a745;
 }
+
+

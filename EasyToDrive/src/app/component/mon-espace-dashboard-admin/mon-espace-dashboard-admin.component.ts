@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -13,11 +13,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class MonEspaceDashboardAdminComponent implements OnInit {
   eleves: any[] = [];
-  selectedEleve: any | null = null;
-  isModalOpen = false;
+  selectedEleve: any | null = null; // Élève sélectionné pour afficher les détails
+  notesEleve: any = { examen_code: [], examen_simu: [] }; // Stocker les notes de l'élève
+  isModalOpen = false; // Modal pour ajouter/modifier un élève
+  isDetailsModalOpen = false; // Modal pour afficher les détails
   isEditing = false;
+  eleveSelectionne: any = null;
 
-  // ✅ Ajout des 6 champs du formulaire
+  // Formulaire pour ajouter/modifier un élève
   eleveForm = { 
     nom: '', 
     prenom: '', 
@@ -32,18 +35,19 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
   ngOnInit() {
     this.chargerEleves();
   }
-  isCodeVisible = false; // Par défaut, le mot de passe est caché
 
-toggleCodeVisibility() {
+  isCodeVisible = false; // le mot de passe est caché
+
+  toggleCodeVisibility() {
     this.isCodeVisible = !this.isCodeVisible;
-}
+  }
 
   chargerEleves() {
     this.http.get<any[]>('https://test888.alwaysdata.net/obtenir_eleves.php').subscribe(
-      (data) => {
+      (data: any[]) => {
         this.eleves = data;
       },
-      (error) => {
+      (error: any) => {
         console.error('Erreur lors du chargement des élèves:', error);
       }
     );
@@ -57,7 +61,8 @@ toggleCodeVisibility() {
   fermerModal() {
     console.log("❌ Modal fermée !");
     this.isModalOpen = false;
-    // ✅ Réinitialisation des champs du formulaire
+    this.isDetailsModalOpen = false; // Fermer aussi la modal des détails
+    // Réinitialisation des champs du formulaire
     this.eleveForm = { nom: '', prenom: '', neph_email: '', auto_ecole: '', jour_inscription: '', code: '' };
     this.isEditing = false;
   }
@@ -70,30 +75,41 @@ toggleCodeVisibility() {
       : 'https://test888.alwaysdata.net/ajouter_eleve.php';
 
     this.http.post(url, this.eleveForm).subscribe(
-      (response) => {
+      (response: any) => {
         console.log("✅ Réponse du serveur :", response);
         this.chargerEleves();
         this.fermerModal();
       },
-      (error) => {
+      (error: any) => {
         console.error("❌ Erreur lors de l'ajout :", error);
       }
     );
   }
 
-  afficherDetails(eleve: any) {
+    afficherDetails(eleve: any, event: MouseEvent) {
+    event.stopPropagation();
     console.log("🧐 Détails de l'élève:", eleve);
-    this.selectedEleve = eleve;
-    this.ouvrirModal(); 
-    this.eleveForm = { 
-        nom: eleve.Nom, 
-        prenom: eleve.Prenom, 
-        neph_email: eleve.NEPH_Email, 
-        auto_ecole: eleve.Auto_Ecole, 
-        jour_inscription: eleve.Jour_inscription, 
-        code: eleve.code 
-    };
-    this.isEditing = true; 
+    this.eleveSelectionne = eleve;
+    this.isDetailsModalOpen = true; // Ouvrir la modal des détails
+
+    // Vérifiez l'URL de l'API
+    const url = `https://test888.alwaysdata.net/obtenir_notes_admin.php?Eleve_ID=${eleve.ID}`;
+    console.log("🔗 URL de l'API:", url);
+
+    // Récupérer les notes de l'élève
+    this.http.get<any>(url).subscribe(
+      (data: any) => {
+        console.log("📊 Réponse de l'API:", data);
+        this.notesEleve = {
+          examen_code: data.examen_code || [], // Assurez-vous que examen_code est un tableau
+          examen_simu: data.examen_simu || [] // Assurez-vous que examen_simu est un tableau
+        };
+      },
+      (error: any) => {
+        console.error("❌ Erreur lors de la récupération des notes:", error);
+        this.notesEleve = { examen_code: [], examen_simu: [] }; // Réinitialiser en cas d'erreur
+      }
+    );
   }
 
   logout() {
