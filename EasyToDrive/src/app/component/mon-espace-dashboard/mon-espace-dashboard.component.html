@@ -62,5 +62,14 @@
               [type]="'bar'">
             </canvas>
           </div> 
+
+          <div>
+            <h2>📊 Répartition des impressions des examens de Simulation</h2>
+            <canvas baseChart 
+                    [data]="pieChartData"
+                    [options]="pieChartOptions"
+                    chartType="pie">
+            </canvas>
+          </div>
     </div>    
 </div>
