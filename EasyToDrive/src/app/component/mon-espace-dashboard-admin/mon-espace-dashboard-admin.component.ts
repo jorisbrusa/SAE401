@@ -22,11 +22,11 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
 
   // Formulaire pour ajouter/modifier un élève
   eleveForm = { 
-    nom: '', 
-    prenom: '', 
-    neph_email: '', 
-    auto_ecole: '', 
-    jour_inscription: '', 
+    Nom: '', 
+    Prenom: '', 
+    NEPH_Email: '', 
+    Auto_Ecole: '', 
+    Jour_inscription: '', 
     code: '' 
   };
 
@@ -63,10 +63,10 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
     this.isModalOpen = false;
     this.isDetailsModalOpen = false; // Fermer aussi la modal des détails
     // Réinitialisation des champs du formulaire
-    this.eleveForm = { nom: '', prenom: '', neph_email: '', auto_ecole: '', jour_inscription: '', code: '' };
+    this.eleveForm = { Nom: '', Prenom: '', NEPH_Email: '', Auto_Ecole: '', Jour_inscription: '', code: '' };
     this.isEditing = false;
   }
-
+  
   validerEleve() {
     console.log("🔹 Envoi du formulaire :", this.eleveForm);
 
@@ -86,7 +86,7 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
     );
   }
 
-    afficherDetails(eleve: any, event: MouseEvent) {
+  afficherDetails(eleve: any, event: MouseEvent) {
     event.stopPropagation();
     console.log("🧐 Détails de l'élève:", eleve);
     this.eleveSelectionne = eleve;
@@ -111,6 +111,36 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
       }
     );
   }
+
+  modifierEleve(eleve: any) {
+    console.log("Modification de l'élève:", eleve);
+    this.eleveForm = { 
+        Nom: eleve.Nom, 
+        Prenom: eleve.Prenom, 
+        NEPH_Email: eleve.NEPH_Email, 
+        Auto_Ecole: eleve.Auto_Ecole, 
+        Jour_inscription: eleve.Jour_inscription, 
+        code: eleve.code 
+    };
+    this.isEditing = true;
+    this.ouvrirModal();
+}
+
+supprimerEleve(eleve: any) {
+    console.log("Suppression de l'élève:", eleve);
+    if (confirm("Êtes-vous sûr de vouloir supprimer cet élève ?")) {
+        const url = `https://test888.alwaysdata.net/supprimer_eleve.php?id=${eleve.ID}`;
+        this.http.delete(url).subscribe(
+            (response: any) => {
+                console.log("Réponse du serveur :", response);
+                this.chargerEleves(); // Recharger la liste des élèves après suppression
+            },
+            (error: any) => {
+                console.error("Erreur lors de la suppression :", error);
+            }
+        );
+    }
+}
 
   logout() {
     localStorage.removeItem('adminID');
