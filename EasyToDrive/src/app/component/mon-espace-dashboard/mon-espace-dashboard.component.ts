@@ -33,6 +33,19 @@ export class MonEspaceDashboardComponent implements OnInit {
     },
   };
 
+
+    // Pour les données
+    resultatsCode: { Date: string; Numero_Examen: string; Note: number }[] = [];
+    resultatsSimu: { Date: string; Numero_Examen: string; Impression: string }[] = [];
+
+    // Pour les graphiques
+    barChartType: any = 'bar';
+    barChartLegend = true;
+
+    pieChartType: any = 'pie';
+    pieChartLegend = true;
+
+
   // Graphique en camembert pour les impressions des examens de simulation
   pieChartData: ChartData<'pie'> = {
     labels: [],
