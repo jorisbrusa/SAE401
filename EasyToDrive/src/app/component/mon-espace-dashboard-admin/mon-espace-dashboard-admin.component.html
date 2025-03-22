@@ -8,22 +8,21 @@
 </head>
 <body>
     <div class="sidebar">
-        <div class="logo" style="margin-left: auto; margin-right: auto;">
+        <div class="logo">
             <img src="logo.png" alt="Easy 2 Drive">
         </div>
         <div class="menu">
-        <h2>ADMIN</h2>
+            <h2>ADMIN</h2>
         </div>
-        <!-- Bouton Déconnexion -->
-        <button (click)="logout()" class="logout-btn" style="margin-right: 0px;">🚪 Déconnexion</button>
+        <button (click)="logout()" class="logout-btn">🚪 Déconnexion</button>
     </div>
 
     <div class="content">
         <div class="header">
             <h2>Gestion des élèves</h2>
-            <button class="add-btn" (click)="ouvrirModal()">Ajouter un élève</button>
+            <button class="add-btn" (click)="ouvrirModal('add')">Ajouter un élève</button>
         </div>
-    
+
         <div class="dashboard-container">
             <h1>Gestion des élèves</h1>
             <table>
@@ -41,65 +40,45 @@
                         <td>{{ eleve.Prenom }}</td>
                         <td>{{ eleve.NEPH_Email }}</td>
                         <td>
-                            <button (click)="afficherDetails(eleve, $event)">Voir détails</button>
+                            <button (click)="afficherDetails(eleve)">Voir détails</button>
                             <button (click)="modifierEleve(eleve)">Modifier</button>
                             <button (click)="supprimerEleve(eleve)">Supprimer</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </div> 
-    </div> 
-    <div class="modal" *ngIf="isEditModalOpen">
+        </div>
+    </div>
+
+    <!-- Modale pour ajouter ou modifier un élève -->
+    <div class="modal" *ngIf="currentModal === 'add' || currentModal === 'edit'">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Modifier un élève</h2>
+                <h2>{{ currentModal === 'edit' ? 'Modifier' : 'Ajouter' }} un élève</h2>
                 <span (click)="fermerModal()" class="close-btn">&times;</span>
             </div>
-    
             <input type="text" [(ngModel)]="eleveForm.Nom" placeholder="Nom" required>
             <input type="text" [(ngModel)]="eleveForm.Prenom" placeholder="Prénom" required>
             <input type="text" [(ngModel)]="eleveForm.NEPH_Email" placeholder="NEPH Email" required>
             <input type="text" [(ngModel)]="eleveForm.Auto_Ecole" placeholder="Auto-école" required>
             <input type="date" [(ngModel)]="eleveForm.Jour_inscription" placeholder="Jour d'inscription" required>
-    
             <div class="password-container">
                 <input [type]="isCodeVisible ? 'text' : 'password'" [(ngModel)]="eleveForm.code" placeholder="Code" required>
                 <button type="button" (click)="toggleCodeVisibility()">👁</button>
             </div>
-    
-            <button id="validateButton" (click)="validerModification()">Modifier</button>
-        </div>
-    </div>
-  
-    <div class="modal" *ngIf="isModalOpen">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>{{ isEditing ? 'Modifier' : 'Ajouter' }} un élève</h2>
-                <span (click)="fermerModal()" class="close-btn">&times;</span>
-            </div>
-    
-            <input type="text" [(ngModel)]="eleveForm.Nom" placeholder="Nom" required>
-            <input type="text" [(ngModel)]="eleveForm.Prenom" placeholder="Prénom" required>
-            <input type="text" [(ngModel)]="eleveForm.NEPH_Email" placeholder="NEPH Email" required>
-            <input type="text" [(ngModel)]="eleveForm.Auto_Ecole" placeholder="Auto-école" required>
-            <input type="date" [(ngModel)]="eleveForm.Jour_inscription" placeholder="Jour d'inscription" required>
-            <input [type]="isCodeVisible ? 'text' : 'password'" [(ngModel)]="eleveForm.code" placeholder="Code" required>
-    
-            <button id="validateButton" (click)="validerEleve()">Valider</button>
+            <button (click)="currentModal === 'edit' ? validerModification() : validerEleve()">
+                {{ currentModal === 'edit' ? 'Modifier' : 'Valider' }}
+            </button>
         </div>
     </div>
 
-    
-  
-
-    <div class="modal2" *ngIf="isDetailsModalOpen" style="overflow: auto;">
+    <!-- Modale pour les détails de l'élève -->
+    <div class="modal" *ngIf="currentModal === 'details'">
         <div class="modal-content2">
             <div class="modal-header">
                 <h2>Détails de l'élève</h2>
                 <span (click)="fermerModal()" class="close-btn">&times;</span>
             </div>
-            
             <div *ngIf="eleveSelectionne">
                 <p><strong>Nom:</strong> {{ eleveSelectionne.Nom }}</p>
                 <p><strong>Prénom:</strong> {{ eleveSelectionne.Prenom }}</p>
@@ -107,8 +86,9 @@
                 <p><strong>Auto-école:</strong> {{ eleveSelectionne.Auto_Ecole }}</p>
                 <p><strong>Jour d'inscription:</strong> {{ eleveSelectionne.Jour_inscription }}</p>
                 <p><strong>Code:</strong> {{ eleveSelectionne.code }}</p>
+                <button (click)="ajouterNote()">➕ Ajouter Note</button>
+                <button (click)="ajouterImpression()">➕ Ajouter Impression</button>
 
-                
                 <h3>📝 Examens de Code</h3>
                 <table>
                     <thead>
@@ -116,6 +96,7 @@
                             <th>Date</th>
                             <th>Numéro Examen</th>
                             <th>Note</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -123,6 +104,10 @@
                             <td>{{ note.Date }}</td>
                             <td>{{ note.Numero_Examen }}</td>
                             <td>{{ note.Note }}</td>
+                            <td>
+                                <button (click)="modifierNote(note)">✏️ Modifier</button>
+                                <button (click)="supprimerNote(note.Numero_Examen)">🗑 Supprimer</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -134,6 +119,7 @@
                             <th>Date</th>
                             <th>Numéro Examen</th>
                             <th>Impression</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,10 +127,42 @@
                             <td>{{ simu.Date }}</td>
                             <td>{{ simu.Numero_Examen }}</td>
                             <td>{{ simu.Impression }}</td>
+                            <td>
+                                <button (click)="modifierImpression(simu)">✏️ Modifier</button>
+                                <button (click)="supprimerImpression(simu.Numero_Examen)">🗑 Supprimer</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+
+    <!-- Modale pour ajouter ou modifier une note -->
+    <div class="modal" *ngIf="currentModal === 'addNote' || currentModal === 'editNote'">
+        <div class="modal-content">
+            <h2>{{ currentModal === 'editNote' ? 'Modifier' : 'Ajouter' }} une note</h2>
+            <input type="date" [(ngModel)]="nouvelleNote.date" placeholder="Date" required>
+            <input type="text" [(ngModel)]="nouvelleNote.numeroExamen" placeholder="Numéro Examen" required>
+            <input type="number" [(ngModel)]="nouvelleNote.score" placeholder="Note" required>
+            <button (click)="currentModal === 'editNote' ? validerModificationNote() : validerAjoutNote()">
+                {{ currentModal === 'editNote' ? 'Sauvegarder' : 'Ajouter' }}
+            </button>
+            <button (click)="fermerModal()">❌ Annuler</button>
+        </div>
+    </div>
+
+    <!-- Modale pour ajouter ou modifier une impression -->
+    <div class="modal" *ngIf="currentModal === 'addImpression' || currentModal === 'editImpression'">
+        <div class="modal-content">
+            <h2>{{ currentModal === 'editImpression' ? 'Modifier' : 'Ajouter' }} une impression</h2>
+            <input type="date" [(ngModel)]="nouvelleImpression.date" placeholder="Date" required>
+            <input type="text" [(ngModel)]="nouvelleImpression.numeroExamen" placeholder="Numéro Examen" required>
+            <input type="text" [(ngModel)]="nouvelleImpression.impression" placeholder="Impression" required>
+            <button (click)="currentModal === 'editImpression' ? validerModificationImpression() : validerAjoutImpression()">
+                {{ currentModal === 'editImpression' ? 'Sauvegarder' : 'Ajouter' }}
+            </button>
+            <button (click)="fermerModal()">❌ Annuler</button>
         </div>
     </div>
 </body>
