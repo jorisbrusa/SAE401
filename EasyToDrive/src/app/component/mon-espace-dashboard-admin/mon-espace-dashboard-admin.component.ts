@@ -19,6 +19,7 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
   isDetailsModalOpen = false; // Modal pour afficher les détails
   isEditing = false;
   eleveSelectionne: any = null;
+  isEditModalOpen = false; // Modal pour modifier un élève
 
   // Formulaire pour ajouter/modifier un élève
   eleveForm = { 
@@ -62,6 +63,7 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
   fermerModal() {
     console.log("❌ Modal fermée !");
     this.isModalOpen = false;
+    this.isEditModalOpen = false; 
     this.isDetailsModalOpen = false; // Fermer aussi la modal des détails
     // Réinitialisation des champs du formulaire
     this.eleveForm = { ID: null, Nom: '', Prenom: '', NEPH_Email: '', Auto_Ecole: '', Jour_inscription: '', code: '' };
@@ -116,9 +118,9 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
   modifierEleve(eleve: any) {
     console.log("🖊️ Modification de l'élève:", eleve);
 
-    // Pré-remplir le formulaire avec les valeurs de l'élève
+    // Pré-remplir le formulaire avec les valeurs de l'élève sélectionné
     this.eleveForm = {
-        ID: eleve.ID, // Inclure l'ID pour la modification
+        ID: eleve.ID, 
         Nom: eleve.Nom,
         Prenom: eleve.Prenom,
         NEPH_Email: eleve.NEPH_Email,
@@ -127,13 +129,23 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
         code: eleve.code
     };
 
-    // Passer en mode édition
-    this.isEditing = true;
-
-    // Ouvrir la modal
-    this.ouvrirModal();
+    // Ouvrir la modal de modification
+    this.isEditModalOpen = true;
 }
+validerModification() {
+  console.log("✅ Données envoyées pour modification :", this.eleveForm);
 
+  this.http.post('https://test888.alwaysdata.net/modifier_eleve.php', this.eleveForm).subscribe(
+    (response: any) => {
+      console.log("✅ Réponse du serveur :", response);
+      this.chargerEleves();
+      this.fermerModal();
+    },
+    (error: any) => {
+      console.error("❌ Erreur lors de la modification :", error);
+    }
+  );
+}
   supprimerEleve(eleve: any) {
     console.log("Suppression de l'élève:", eleve);
     if (confirm("Êtes-vous sûr de vouloir supprimer cet élève ?")) {
