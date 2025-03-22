@@ -1,103 +1,78 @@
 <div class="sidebar">
-  <div class="logo">
-    <img src="../../../assets/logo.png" alt="Easy 2 Drive">
-  </div>
-  <div class="menu">
+    <div class="logo">
+        <img src="logo.png" alt="Easy 2 Drive">
+    </div>
+    <div class="menu">
     <h2>ELEVE</h2>
-    <a routerLink="/mon-espace-dashboard" class="boutonS">Récapitulatif</a>
-    <a routerLink="/mon-espace-dashboard-avis" class="boutonS">Avis</a>
-  </div>
-  <button class="logout-button" (click)="logout()">📋 Déconnexion</button>
+    <a class="boutonS" routerLink="/mon-espace-dashboard" routerLinkActive="active">Récapitulatif</a>
+    <br>
+    <a class="boutonS" routerLink="/mon-espace-dashboard-avis" routerLinkActive="active">Avis</a>
+    </div>
+    <!-- Bouton Déconnexion -->
+    <button (click)="logout()" class="logout-button">🚪 Déconnexion</button>
 </div>
 
 <div class="content">
-  <h1>📊 Vos statistiques</h1>
+    <h1>Vos statistiques</h1>
 
-  <!-- Examens de Code -->
-  <div class="dashboard-container">
-    <h2>📝 Examens de Code</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Numéro Examen</th>
-          <th>Note</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let exam of resultatsCode">
-          <td>{{ exam.Date }}</td>
-          <td>{{ exam.Numero_Examen }}</td>
-          <td>{{ exam.Note }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="notes-container">
+        <h3>📌 <b>Mes Notes</b></h3>
+    
+        <h4>📝 Examens de Code</h4>
+        <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Numéro Examen</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let note of notesCode">
+                <td>{{ note.Date }}</td>
+                <td>{{ note.Numero_Examen }}</td>
+                <td>{{ note.Note }}</td>
+              </tr>
+            </tbody>
+          </table>
+        
+          <!-- Examens de Simulation -->
+          <h3>🚗 <strong>Examens de Simulation</strong></h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Numéro Examen</th>
+                <th>Impression</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let simu of notesSimu">
+                <td>{{ simu.Date }}</td>
+                <td>{{ simu.Numero_Examen }}</td>
+                <td>{{ simu.Impression }}</td>
+              </tr>
+            </tbody>
+          </table>
 
-  <!-- Examens de Simulation -->
-  <div class="dashboard-container">
-    <h2>🚗 Examens de Simulation</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Numéro Examen</th>
-          <th>Impression</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let exam of resultatsSimu">
-          <td>{{ exam.Date }}</td>
-          <td>{{ exam.Numero_Examen }}</td>
-          <td>{{ exam.Impression }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- Graphique Notes -->
-  <div class="graph-container">
-    <h2>📈 Graphique des Notes</h2>
-    <p>Notes des examens de code</p>
-    <canvas baseChart
-      [data]="barChartData"
-      [options]="barChartOptions"
-      [type]="barChartType"
-      [legend]="barChartLegend">
-    </canvas>
-  </div>
+          <!-- Graphique -->
+          <div class="dashboard-container">
+            <h3>📊 <strong>Graphique des Notes</strong></h3>
+            <canvas baseChart
+              [data]="barChartData"
+              [options]="barChartOptions"
+              [type]="'bar'">
+            </canvas>
+          </div> 
 
-  <!-- Récapitulatif graphique après tableau -->
-  <div class="dashboard-container">
-    <h2>📄 Récapitulatif de vos examens de code</h2>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Numéro Examen</th>
-          <th>Note</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let exam of resultatsCode">
-          <td>{{ exam.Date }}</td>
-          <td>{{ exam.Numero_Examen }}</td>
-          <td>{{ exam.Note }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Graphique Impressions -->
-  <div class="graph-container">
-    <h2>📊 Répartition des impressions des examens de simulation</h2>
-    <p>Répartition des impressions des examens de simulation</p>
-    <canvas baseChart
-      [data]="pieChartData"
-      [options]="pieChartOptions"
-      [type]="pieChartType"
-      [legend]="pieChartLegend">
-    </canvas>
-  </div>
+          <div>
+            <h2>📊 Répartition des impressions des examens de Simulation</h2>
+            <canvas baseChart 
+                    [data]="pieChartData"
+                    [options]="pieChartOptions"
+                    chartType="pie">
+            </canvas>
+          </div>
+    </div>    
 </div>

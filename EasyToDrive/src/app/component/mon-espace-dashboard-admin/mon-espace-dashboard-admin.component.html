@@ -106,7 +106,7 @@
                             <td>{{ note.Note }}</td>
                             <td>
                                 <button (click)="modifierNote(note)">✏️ Modifier</button>
-                                <button (click)="supprimerNote(note.Numero_Examen)">🗑 Supprimer</button>
+                                <button (click)="supprimerNote(note.ID)">🗑 Supprimer</button>
                             </td>
                         </tr>
                     </tbody>
@@ -129,7 +129,7 @@
                             <td>{{ simu.Impression }}</td>
                             <td>
                                 <button (click)="modifierImpression(simu)">✏️ Modifier</button>
-                                <button (click)="supprimerImpression(simu.Numero_Examen)">🗑 Supprimer</button>
+                                <button (click)="supprimerImpression(simu.ID)">🗑 Supprimer</button>
                             </td>
                         </tr>
                     </tbody>

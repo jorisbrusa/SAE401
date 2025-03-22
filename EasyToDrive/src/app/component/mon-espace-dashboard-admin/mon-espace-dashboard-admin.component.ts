@@ -155,36 +155,71 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
 
   modifierNote(note: any) {
     console.log("✏️ Modification de la note:", note);
-    this.noteEnCours = { ...note };
-    this.nouvelleNote = { date: note.Date, numeroExamen: note.Numero_Examen, score: note.Note };
+  
+    // Assigne manuellement les propriétés pour garantir l'ID
+    this.noteEnCours = {
+      ID: note.ID ?? note.id, // Prend ID ou id peu importe le nom de départ
+      Date: note.Date,
+      Numero_Examen: note.Numero_Examen,
+      Note: note.Note
+    };
+  
+    this.nouvelleNote = {
+      date: note.Date,
+      numeroExamen: note.Numero_Examen,
+      score: note.Note
+    };
+  
     this.currentModal = 'editNote';
   }
-
+  
   validerModificationNote() {
     console.log("✅ Validation de la modification de la note:", this.nouvelleNote);
-    const url = 'https://test888.alwaysdata.net/modifier_note.php'; // Remplacez par l'URL de votre API
+    console.log("🧩 ID envoyé:", this.noteEnCours.ID);
+  
+    if (!this.noteEnCours.ID) {
+      console.error("❌ L'ID de la note est manquant !");
+      return;
+    }
+  
+    const url = 'https://test888.alwaysdata.net/modifier_note.php';
+  
     this.http.post(url, {
-        id: this.noteEnCours.id,
-        Date: this.nouvelleNote.date,
-        Numero_Examen: this.nouvelleNote.numeroExamen,
-        Note: this.nouvelleNote.score
+      ID: this.noteEnCours.ID, // majuscule ici aussi
+      Date: this.nouvelleNote.date,
+      Numero_Examen: this.nouvelleNote.numeroExamen,
+      Note: this.nouvelleNote.score
     }).subscribe(
-        (response: any) => {
-            console.log("✅ Note modifiée avec succès:", response);
-            this.fermerModal();
-            this.afficherDetails(this.eleveSelectionne); // Recharger les détails de l'élève
-        },
-        (error: any) => console.error("❌ Erreur lors de la modification de la note:", error)
+      (response: any) => {
+        console.log("✅ Note modifiée avec succès:", response);
+        this.fermerModal();
+        this.afficherDetails(this.eleveSelectionne);
+      },
+      (error: any) => console.error("❌ Erreur lors de la modification de la note:", error)
     );
   }
+  
+  
+  
 
   supprimerNote(id: number) {
-    console.log("🗑️ Suppression de la note avec l'ID:", id);
     if (confirm("Voulez-vous vraiment supprimer cette note ?")) {
-      this.notesEleve.examen_code = this.notesEleve.examen_code.filter((n: any) => n.id !== id);
-      console.log("✅ Note supprimée avec succès");
+      console.log("🗑️ Suppression de la note avec l'ID:", id);
+  
+      const url = 'https://test888.alwaysdata.net/supprimer_note.php';
+      this.http.post(url, { id }).subscribe(
+        (res: any) => {
+          console.log("✅ Note supprimée avec succès:", res);
+  
+          // Rechargement complet depuis l'API
+          this.afficherDetails(this.eleveSelectionne);
+        },
+        (err: any) => console.error("❌ Erreur lors de la suppression:", err)
+      );
     }
   }
+  
+  
 
   ajouterImpression() {
     console.log("➕ Ajout d'une nouvelle impression");
@@ -194,7 +229,7 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
 
   validerAjoutImpression() {
     console.log("✅ Validation de l'ajout de l'impression:", this.nouvelleImpression);
-    const url = 'https://test888.alwaysdata.net/ajouter_note.php'; // Remplacez par l'URL de votre API
+    const url = 'https://test888.alwaysdata.net/ajouter_note.php';
     this.http.post(url, {
         Eleve_ID: this.eleveSelectionne.ID,
         Date: this.nouvelleImpression.date,
@@ -204,44 +239,77 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
           (response: any) => {
               console.log("✅ Impression ajoutée avec succès:", response);
               this.fermerModal();
-              this.afficherDetails(this.eleveSelectionne); // Recharger les détails de l'élève
+              this.afficherDetails(this.eleveSelectionne); 
           },
           (error: any) => console.error("❌ Erreur lors de l'ajout de l'impression:", error)
       );
   }
   
   modifierImpression(impression: any) {
-      console.log("✏️ Modification de l'impression:", impression);
-      this.impressionEnCours = { ...impression };
-      this.nouvelleImpression = { date: impression.Date, numeroExamen: impression.Numero_Examen, impression: impression.Impression };
-      this.currentModal = 'editImpression';
+    console.log("✏️ Modification de l'impression:", impression);
+  
+    // Si ID non présent, tente de récupérer depuis un autre champ
+    if (!impression.ID && impression.id) {
+      impression.ID = impression.id;
+    }
+  
+    this.impressionEnCours = { ...impression };
+  
+    this.nouvelleImpression = {
+      date: impression.Date,
+      numeroExamen: impression.Numero_Examen,
+      impression: impression.Impression
+    };
+  
+    this.currentModal = 'editImpression';
   }
+  
   
   validerModificationImpression() {
-      console.log("✅ Validation de la modification de l'impression:", this.nouvelleImpression);
-      const url = 'https://test888.alwaysdata.net/modifier_impression.php'; // Remplacez par l'URL de votre API
-      this.http.post(url, {
-          id: this.impressionEnCours.id,
-          Date: this.nouvelleImpression.date,
-          Numero_Examen: this.nouvelleImpression.numeroExamen,
-          Impression: this.nouvelleImpression.impression
-      }).subscribe(
-          (response: any) => {
-              console.log("✅ Impression modifiée avec succès:", response);
-              this.fermerModal();
-              this.afficherDetails(this.eleveSelectionne); // Recharger les détails de l'élève
-          },
-          (error: any) => console.error("❌ Erreur lors de la modification de l'impression:", error)
-      );
+    console.log("✅ Validation de la modification de l'impression:", this.nouvelleImpression);
+    console.log("🧩 ID impression envoyé:", this.impressionEnCours.ID);
+  
+    if (!this.impressionEnCours.ID) {
+      console.error("❌ L'ID de l'impression est manquant !");
+      return;
+    }
+  
+    const url = 'https://test888.alwaysdata.net/modifier_simu.php';
+  
+    this.http.post(url, {
+      id: this.impressionEnCours.ID,
+      Date: this.nouvelleImpression.date,
+      Numero_Examen: this.nouvelleImpression.numeroExamen,
+      Impression: this.nouvelleImpression.impression
+    }).subscribe(
+      (response: any) => {
+        console.log("✅ Impression modifiée avec succès:", response);
+        this.fermerModal();
+        this.afficherDetails(this.eleveSelectionne);
+      },
+      (error: any) => console.error("❌ Erreur lors de la modification de l'impression:", error)
+    );
   }
   
+  
   supprimerImpression(id: number) {
+    if (confirm("Voulez-vous vraiment supprimer cette impression ?")) {
       console.log("🗑️ Suppression de l'impression avec l'ID:", id);
-      if (confirm("Voulez-vous vraiment supprimer cette impression ?")) {
-        this.notesEleve.examen_simu = this.notesEleve.examen_simu.filter((i: any) => i.id !== id);
-        console.log("✅ Impression supprimée avec succès");
-      }
+  
+      const url = 'https://test888.alwaysdata.net/supprimer_simu.php';
+      this.http.post(url, { id }).subscribe(
+        (res: any) => {
+          console.log("✅ Impression supprimée avec succès:", res);
+  
+          // Mettre à jour les données affichées
+          this.afficherDetails(this.eleveSelectionne);
+        },
+        (err: any) => console.error("❌ Erreur lors de la suppression de l'impression:", err)
+      );
+    }
   }
+  
+  
   
   logout() {
       console.log("🚪 Déconnexion de l'administrateur");
