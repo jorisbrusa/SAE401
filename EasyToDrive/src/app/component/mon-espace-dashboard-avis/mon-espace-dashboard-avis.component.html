@@ -1,0 +1,26 @@
+<div class="sidebar">
+    <div class="logo">
+        <img src="logo.png" alt="Easy 2 Drive">
+    </div>
+    <div class="menu">
+    <h2>ELEVE</h2>
+    <a class="boutonS" routerLink="/mon-espace-dashboard" routerLinkActive="active">Récapitulatif</a>
+    <br>
+    <a class="boutonS" routerLink="/mon-espace-dashboard-avis" routerLinkActive="active">Avis</a>
+    </div>
+    <!-- Bouton Déconnexion -->
+    <button (click)="logout()" class="logout-button">🚪 Déconnexion</button>
+</div>
+
+<div class="avis-container">
+    <h1>Laissez un avis ?</h1>
+  
+    <form (ngSubmit)="envoyerAvis()" #avisForm="ngForm">
+      <div class="avis-form">
+        <h2>💬 Laisser un avis</h2>
+        <label for="contenu">Votre avis :</label>
+        <textarea id="contenu" name="contenu" [(ngModel)]="avis.Contenu" required></textarea>
+        <button type="submit">Envoyer</button>
+      </div>
+    </form>
+</div>

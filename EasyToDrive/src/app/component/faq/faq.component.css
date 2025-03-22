@@ -1,0 +1,27 @@
+.avis-publics {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  
+  .avis-card {
+    background: #ffffff;
+    padding: 15px 20px;
+    border-left: 5px solid #2B6CB0;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  .avis-contenu {
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  
+  .avis-date {
+    font-size: 13px;
+    color: #666;
+    text-align: right;
+  }
+  

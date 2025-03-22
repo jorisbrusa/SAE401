@@ -1,1 +1,9 @@
-<p>faq works!</p>
+<div class="avis-publics">
+    <h2>🗣️ Avis laissés par les élèves</h2>
+  
+    <div *ngFor="let avis of avisList" class="avis-card">
+      <p class="avis-contenu">"{{ avis.Contenu }}"</p>
+      <p class="avis-date">🗓️ {{ avis.Date }}</p>
+    </div>
+  </div>
+  

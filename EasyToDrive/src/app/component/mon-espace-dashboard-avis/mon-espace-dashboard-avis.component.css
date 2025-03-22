@@ -118,23 +118,6 @@ th {
 }
 
 
-button {
-    border-radius: 15px;
-    transition: transform 0.2s ease-in-out;
-    background-color: green;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: rgb(1, 78, 1);
-    transform: scale(1.1);
-}
-
-
-
 .boutonS {
     display: block;
     background-color: #2B6CB0;
@@ -156,3 +139,71 @@ button:hover {
     background-color: #193e67;
     transform: scale(1.05);
 }
+
+
+
+.avis-container {
+    padding: 40px;
+    margin-left: 250px; /* si sidebar fixe à gauche */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+  }
+  
+  .avis-container h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  .avis-form {
+    background-color: white;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .avis-form h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+  
+  .avis-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .avis-form textarea {
+    width: 100%;
+    height: 120px;
+    resize: vertical;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  
+  .avis-form button {
+    background-color: #2B6CB0;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease;
+  }
+  
+  .avis-form button:hover {
+    background-color: #193e67;
+    transform: scale(1.05);
+  }
+  

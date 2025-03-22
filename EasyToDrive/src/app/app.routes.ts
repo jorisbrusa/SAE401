@@ -8,6 +8,7 @@ import { MonEspaceConnexionAdminComponent } from './component/mon-espace-connexi
 import { MonEspaceDashboardComponent } from './component/mon-espace-dashboard/mon-espace-dashboard.component';
 import { MonEspaceDashboardAdminComponent } from './component/mon-espace-dashboard-admin/mon-espace-dashboard-admin.component'; 
 import { AuthGuard } from './guards/auth.guard'; 
+import { MonEspaceDashboardAvisComponent } from './component/mon-espace-dashboard-avis/mon-espace-dashboard-avis.component';
 
 export const routes: Routes = [
   { path: 'mon-espace', component: MonEspaceSelectionComponent, data: { animation: 'MonEspacePage' } },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'mon-espace-connexion-admin', component: MonEspaceConnexionAdminComponent, data: { animation: 'AdminPage' } },
   { path: 'mon-espace-dashboard', component: MonEspaceDashboardComponent, canActivate: [AuthGuard] },
   { path: 'mon-espace-dashboard-admin', component: MonEspaceDashboardAdminComponent, canActivate: [AuthGuard] },
+  { path: 'mon-espace-dashboard-avis', component: MonEspaceDashboardAvisComponent, canActivate: [AuthGuard]},
   { path: '', component: AccueilComponent },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }
 ];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartData, ChartOptions } from 'chart.js';
@@ -8,7 +8,7 @@ import { ChartData, ChartOptions } from 'chart.js';
 @Component({
   selector: 'app-mon-espace-dashboard',
   standalone: true,
-  imports: [CommonModule, NgChartsModule],
+  imports: [CommonModule, NgChartsModule, RouterModule],
   templateUrl: './mon-espace-dashboard.component.html',
   styleUrls: ['./mon-espace-dashboard.component.css'],
 })

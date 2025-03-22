@@ -8,8 +8,9 @@ const routes: Routes = [
   { path: 'accueil', loadComponent: () => import('./component/accueil/accueil.component').then(m => m.AccueilComponent) },
   { path: 'mon-espace-connexion', loadComponent: () => import('./component/mon-espace-conexion/mon-espace-conexion.component').then(m => m.MonEspaceConexionComponent) },
   { path: 'mon-espace-connexion-admin', loadComponent: () => import('./component/mon-espace-connexion-admin/mon-espace-connexion-admin.component').then(m => m.MonEspaceConnexionAdminComponent) },
+  { path: 'mon-espace-dashboard-avis', loadComponent: () => import('./component/mon-espace-dashboard-avis/mon-espace-dashboard-avis.component'). then(m => m.MonEspaceDashboardAvisComponent) },
   { path: 'mon-espace-dashboard', loadComponent: () => import('./component/mon-espace-dashboard/mon-espace-dashboard.component').then(m => m.MonEspaceDashboardComponent) },
-  { path: 'mon-espace-dashboard-admin', loadComponent: () => import('./component/mon-espace-dashboard-admin/mon-espace-dashboard-admin.component').then(m => m.monespacedashboardadmincomponent) },
+  { path: 'mon-espace-dashboard-admin', loadComponent: () => import('./component/mon-espace-dashboard-admin/mon-espace-dashboard-admin.component').then(m => m.MonEspaceDashboardAdminComponent) },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }
 ];
 
