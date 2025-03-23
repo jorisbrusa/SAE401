@@ -58,33 +58,35 @@ body {
 
 /* ==== CONTENU ==== */
 .content {
-  flex: 1;
-  padding: 20px; /* Réduire le padding pour les écrans mobiles */
+  flex: 1;  /* Assure que cette section prend toute la largeur disponible */
+  padding: 40px;
   background-color: #F8F9FA;
   width: 100%;
-  box-sizing: border-box; /* Inclure le padding dans la largeur */
+  box-sizing: border-box;  /* Cela inclut le padding dans la largeur totale */
 }
+
+
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 20px; /* Réduire la marge */
+  margin-bottom: 30px;
 }
 
 .header h2 {
-  font-size: 24px; /* Réduire la taille de la police */
+  font-size: 28px;
   font-weight: bold;
   color: #333;
-  padding: 10px 0; /* Réduire le padding */
+  padding: 20px 0;
 }
 
 /* ==== BOUTON AJOUT ==== */
 .add-btn {
   background-color: #28a745;
   color: white;
-  padding: 10px 15px; /* Réduire le padding */
+  padding: 12px 20px;
   border: none;
   cursor: pointer;
   border-radius: 6px;
@@ -98,7 +100,7 @@ body {
 
 /* ==== TABLE ==== */
 table {
-  width: 100%;
+  width: 85%;
   border-collapse: collapse;
   background-color: white;
   border-radius: 8px;
@@ -107,13 +109,9 @@ table {
 }
 
 th, td {
-  padding: 10px; /* Réduire le padding */
+  padding: 12px;
   text-align: left;
   border-bottom: 1px solid #e0e0e0;
-  max-width: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 th {
@@ -127,17 +125,16 @@ td:last-child {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
-  justify-content: flex-start;
 }
 
 /* ==== ACTION BUTTONS ==== */
 button {
-  padding: 6px 12px; /* Réduire le padding */
+  padding: 8px 14px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  font-size: 12px; /* Réduire la taille de la police */
+  font-size: 13px;
   transition: transform 0.2s ease-in-out;
 }
 
@@ -172,12 +169,12 @@ button:nth-child(3) {
   background: rgba(0, 0, 0, 0.4);
   justify-content: center;
   align-items: center;
-  padding: 10px; /* Réduire le padding */
+  padding: 20px;
 }
 
 .modal-content, .modal-content2 {
   background: white;
-  padding: 20px; /* Réduire le padding */
+  padding: 25px;
   border-radius: 10px;
   max-width: 800px;
   width: 100%;
@@ -194,12 +191,12 @@ button:nth-child(3) {
 }
 
 .modal-header h2 {
-  font-size: 18px; /* Réduire la taille de la police */
+  font-size: 20px;
   font-weight: bold;
 }
 
 .close-btn {
-  font-size: 20px; /* Réduire la taille de la police */
+  font-size: 22px;
   cursor: pointer;
   color: #999;
 }
@@ -208,9 +205,9 @@ button:nth-child(3) {
 input {
   display: block;
   width: 100%;
-  margin: 8px 0; /* Réduire la marge */
-  padding: 10px; /* Réduire le padding */
-  font-size: 14px; /* Réduire la taille de la police */
+  margin: 10px 0;
+  padding: 12px;
+  font-size: 15px;
   border-radius: 6px;
   border: 1px solid #ccc;
 }
@@ -219,7 +216,7 @@ input {
 .password-container {
   display: flex;
   align-items: center;
-  gap: 8px; /* Réduire l'espace */
+  gap: 10px;
 }
 
 .password-container input {
@@ -232,7 +229,6 @@ input {
     flex-direction: row;
     justify-content: space-around;
     padding: 10px;
-    align-items: center;
   }
 
   .menu h2 {
@@ -250,16 +246,6 @@ input {
     gap: 10px;
   }
 
-  .table-responsive {
-    overflow-x: auto;
-    width: 100%;
-  }
-
-  table {
-    width: 100%;
-    min-width: 100%;
-  }
-
   td:last-child {
     flex-direction: column;
   }
@@ -268,17 +254,21 @@ input {
     max-width: 100%;
     height: auto;
   }
+
 }
 
-/* Conteneur de la table pour les écrans étroits */
+
+
+
+
+
+
 .table-responsive {
   overflow-x: auto;
-  width: 100%;
+  width: 100%;  /* Assurez-vous que la table occupe toute la largeur possible */
 }
 
-/* S'assurer que la table ne dépasse pas */
 table {
-  width: 100%;
-  min-width: 600px;
+  min-width: 600px;  /* Fixe une largeur minimale pour éviter que la table ne se casse */
   border-collapse: collapse;
 }
