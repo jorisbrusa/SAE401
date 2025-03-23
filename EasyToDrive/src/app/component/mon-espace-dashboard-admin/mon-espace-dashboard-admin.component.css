@@ -100,7 +100,7 @@ body {
 
 /* ==== TABLE ==== */
 table {
-  width: 85%;
+  width: 100%;
   border-collapse: collapse;
   background-color: white;
   border-radius: 8px;
