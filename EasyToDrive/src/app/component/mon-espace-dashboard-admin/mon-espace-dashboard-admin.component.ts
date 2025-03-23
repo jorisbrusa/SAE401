@@ -116,18 +116,41 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
     );
   }
 
+
   supprimerEleve(eleve: any) {
-    console.log("🗑️ Suppression de l'élève:", eleve);
+    const id = eleve;
+  
+    if (!id) {
+      alert("Erreur : ID de l'élève introuvable.");
+      return;
+    }
+  
+    const url = `https://test888.alwaysdata.net/supprimer_eleve.php?ID=${id}`;
+    console.log("🔗 URL appelée :", url);
+  
     if (confirm("Êtes-vous sûr de vouloir supprimer cet élève ?")) {
-      this.http.post('https://test888.alwaysdata.net/supprimer_eleve.php', { id: eleve.ID }).subscribe(
+      this.http.delete(url).subscribe(
         (response: any) => {
-          console.log("✅ Élève supprimé avec succès:", response);
+          console.log("✅ Réponse du serveur :", response);
+  
+          if (response?.success) {
+            alert("✅ L'élève a bien été supprimé.");
+          } else {
+            alert("❌ Erreur lors de la suppression : " + (response?.error || "Réponse inconnue"));
+          }
+  
           this.chargerEleves();
         },
-        (error: any) => console.error("❌ Erreur lors de la suppression :", error)
+        (error: any) => {
+          console.error("❌ Erreur HTTP :", error);
+          alert("Erreur lors de la suppression de l'élève.");
+        }
       );
     }
   }
+  
+  
+  
 
   ajouterNote() {
     console.log("➕ Ajout d'une nouvelle note");
