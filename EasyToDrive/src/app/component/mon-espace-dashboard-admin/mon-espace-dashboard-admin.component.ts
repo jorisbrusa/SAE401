@@ -17,6 +17,7 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
   currentModal: string | null = null; // Gère l'état des modales
   eleveSelectionne: any = null;
   isCodeVisible = false;
+  avisList: any[] = [];
 
   eleveForm = {
     ID: null,
@@ -38,7 +39,37 @@ export class MonEspaceDashboardAdminComponent implements OnInit {
   ngOnInit() {
     console.log("🚀 Initialisation du composant Dashboard Admin");
     this.chargerEleves();
+    this.chargerAvis();
+
   }
+
+  chargerAvis() {
+    this.http.get<any[]>('https://test888.alwaysdata.net/obtenir_avis.php').subscribe(
+      (data) => {
+        this.avisList = data;
+        console.log("📝 Avis chargés :", data);
+      },
+      (error) => {
+        console.error("❌ Erreur chargement avis :", error);
+      }
+    );
+  }
+  
+  supprimerAvis(id: number) {
+    if (confirm("Supprimer cet avis ?")) {
+      this.http.delete(`https://test888.alwaysdata.net/supprimer_avis.php?ID=${id}`).subscribe(
+        (res: any) => {
+          if (res.success) {
+            this.avisList = this.avisList.filter(a => a.ID_AVIS !== id);
+          } else {
+            alert("Erreur lors de la suppression");
+          }
+        },
+        (err) => console.error("❌ Erreur suppression :", err)
+      );
+    }
+  }
+  
 
   toggleCodeVisibility() {
     this.isCodeVisible = !this.isCodeVisible;

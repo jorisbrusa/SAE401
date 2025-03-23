@@ -47,7 +47,34 @@
               </tbody>
             </table>
           </div>          
+
+
+        <div class="avis-section">
+            <h3>Gestion des avis</h3>
+            <table class="avis-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Contenu</th>
+                        <th>ID Élève</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let avis of avisList">
+                        <td>{{ avis.Date }}</td>
+                        <td>{{ avis.Contenu }}</td>
+                        <td>{{ avis.Eleve_ID }}</td>
+                        <td>
+                            <button (click)="supprimerAvis(avis.ID_AVIS)">Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+          
+
 
     <!-- Modale pour ajouter ou modifier un élève -->
     <div class="modal" *ngIf="currentModal === 'add' || currentModal === 'edit'">
