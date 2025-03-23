@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 interface Avis {
   Date: string;
@@ -12,7 +13,7 @@ interface Avis {
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, HttpClientModule]
 })
 export class FaqComponent implements OnInit {
   avisList: Avis[] = [];

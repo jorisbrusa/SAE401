@@ -9,7 +9,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: #ffffff;
     padding: 20px;
 }
@@ -83,4 +82,11 @@ button {
 button:hover {
     background-color: #fe701e;
     transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        margin-top: 18%;
+    }
 }

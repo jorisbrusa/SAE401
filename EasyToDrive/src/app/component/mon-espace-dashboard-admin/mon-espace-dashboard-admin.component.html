@@ -20,34 +20,33 @@
     <div class="content">
         <div class="header">
             <h2>Gestion des élèves</h2>
-            <button class="add-btn" (click)="ouvrirModal('add')">Ajouter un élève</button>
+            <button class="add-btnE" (click)="ouvrirModal('add')">Ajouter un élève</button>
         </div>
 
-        <div class="dashboard-container">
-            <h1>Gestion des élèves</h1>
+        <div class="table-responsive">
             <table>
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>NEPH</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let eleve of eleves">
-                        <td>{{ eleve.Nom }}</td>
-                        <td>{{ eleve.Prenom }}</td>
-                        <td>{{ eleve.NEPH_Email }}</td>
-                        <td>
-                            <button (click)="afficherDetails(eleve)">Voir détails</button>
-                            <button (click)="modifierEleve(eleve)">Modifier</button>
-                            <button (click)="supprimerEleve(eleve)">Supprimer</button>
-                        </td>
-                    </tr>
-                </tbody>
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Prénom</th>
+                  <th>NEPH</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let eleve of eleves">
+                  <td>{{ eleve.Nom }}</td>
+                  <td>{{ eleve.Prenom }}</td>
+                  <td>{{ eleve.NEPH_Email }}</td>
+                  <td>
+                    <button class="voir" (click)="afficherDetails(eleve)">Voir détails</button>
+                    <button class="modifier" (click)="modifierEleve(eleve)">Modifier</button>
+                    <button class="supprimer" (click)="supprimerEleve(eleve.ID)">Supprimer</button>
+                  </td>
+                </tr>
+              </tbody>
             </table>
-        </div>
+          </div>          
     </div>
 
     <!-- Modale pour ajouter ou modifier un élève -->
@@ -57,11 +56,13 @@
                 <h2>{{ currentModal === 'edit' ? 'Modifier' : 'Ajouter' }} un élève</h2>
                 <span (click)="fermerModal()" class="close-btn">&times;</span>
             </div>
+            <div class="inputE">
             <input type="text" [(ngModel)]="eleveForm.Nom" placeholder="Nom" required>
             <input type="text" [(ngModel)]="eleveForm.Prenom" placeholder="Prénom" required>
             <input type="text" [(ngModel)]="eleveForm.NEPH_Email" placeholder="NEPH Email" required>
             <input type="text" [(ngModel)]="eleveForm.Auto_Ecole" placeholder="Auto-école" required>
             <input type="date" [(ngModel)]="eleveForm.Jour_inscription" placeholder="Jour d'inscription" required>
+            </div>
             <div class="password-container">
                 <input [type]="isCodeVisible ? 'text' : 'password'" [(ngModel)]="eleveForm.code" placeholder="Code" required>
                 <button type="button" (click)="toggleCodeVisibility()">👁</button>
@@ -106,7 +107,7 @@
                             <td>{{ note.Note }}</td>
                             <td>
                                 <button (click)="modifierNote(note)">✏️ Modifier</button>
-                                <button (click)="supprimerNote(note.Numero_Examen)">🗑 Supprimer</button>
+                                <button (click)="supprimerNote(note.ID)">🗑 Supprimer</button>
                             </td>
                         </tr>
                     </tbody>
@@ -129,7 +130,7 @@
                             <td>{{ simu.Impression }}</td>
                             <td>
                                 <button (click)="modifierImpression(simu)">✏️ Modifier</button>
-                                <button (click)="supprimerImpression(simu.Numero_Examen)">🗑 Supprimer</button>
+                                <button (click)="supprimerImpression(simu.ID)">🗑 Supprimer</button>
                             </td>
                         </tr>
                     </tbody>

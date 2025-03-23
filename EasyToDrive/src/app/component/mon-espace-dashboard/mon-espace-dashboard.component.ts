@@ -65,6 +65,7 @@ export class MonEspaceDashboardComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
+
     this.eleveID = parseInt(localStorage.getItem('eleveID') || '0', 10);
     if (!this.eleveID) {
       console.error("Aucun ID d'élève trouvé.");

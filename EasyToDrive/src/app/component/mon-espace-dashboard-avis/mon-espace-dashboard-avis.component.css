@@ -2,208 +2,220 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-/* Style de la barre latérale */
-.sidebar {
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  /* Sidebar */
+  .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #E6611A;
+    background-color: #e6611a;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
     position: fixed;
-}
-
-/* Logo */
-.logo img {
+  }
+  
+  /* Logo */
+  .logo img {
     width: 150px;
     margin-bottom: 20px;
-}
-
-/* Titre */
-.sidebar h2 {
+  }
+  
+  /* Titre */
+  .sidebar h2 {
     font-size: 18px;
     margin-bottom: 20px;
-}
-
-/* Bouton */
-.btn {
-    background-color: #2A6DCD;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-.btn:hover {
-    background-color: #1E4FA0;
-}
-
-/* Lien */
-.sidebar a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-/* Contenu principal */
-.content {
-    margin-left: 260px;
-    padding: 20px;
-}
-
-.content h1 {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-/* Dashboard container */
-.dashboard-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-h2, h3 {
-    text-align: center;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-}
-
-th {
-    background-color: #f4f4f4;
-}
-
-.logout-button {
-    margin-bottom: 100px;
+  }
+  
+  /* Menu */
+  .menu {
+    flex-grow: 1;
+  }
+  
+  /* Boutons */
+  .boutonS {
     display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background: #d9534f;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.logout-button:hover {
-    background: #c9302c;
-}
-
-
-.menu {
-    flex-grow: 1; /* Prend tout l'espace disponible et pousse le bouton vers le bas */
-}
-
-
-.boutonS {
-    display: block;
-    background-color: #2B6CB0;
+    background-color: #2b6cb0;
     color: white;
     border: none;
     padding: 10px;
     width: 100%;
     max-width: 230px;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 15px;
     font-weight: bold;
     margin: 10px 0;
     text-align: center;
     transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
-.boutonS:hover {
+  }
+  
+  .boutonS:hover {
     background-color: #193e67;
     transform: scale(1.05);
-}
-
-
-
-.avis-container {
+  }
+  
+  /* Déconnexion */
+  .logout-button {
+    margin-bottom: 60px;
+    display: block;
+    padding: 10px 20px;
+    background: #d9534f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .logout-button:hover {
+    background: #c9302c;
+  }
+  
+  /* Contenu principal */
+  .content {
+    margin-left: 270px;
     padding: 40px;
-    margin-left: 250px; /* si sidebar fixe à gauche */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f8f8f8;
+    background-color: #f6f8fa;
     min-height: 100vh;
   }
   
-  .avis-container h1 {
+  /* Titre */
+  h1 {
     font-size: 26px;
     font-weight: bold;
     margin-bottom: 30px;
+    color: #2b6cb0;
+    text-align: center;
   }
   
-  .avis-form {
+  /* Formulaire */
+  form {
     background-color: white;
-    padding: 25px 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  textarea {
     width: 100%;
-    max-width: 600px;
-  }
-  
-  .avis-form h2 {
-    margin-bottom: 15px;
-    font-size: 20px;
-  }
-  
-  .avis-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-  }
-  
-  .avis-form textarea {
-    width: 100%;
-    height: 120px;
-    resize: vertical;
-    padding: 10px;
-    font-size: 14px;
+    padding: 15px;
+    border-radius: 8px;
     border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
+    resize: none;
+    font-size: 16px;
   }
   
-  .avis-form button {
-    background-color: #2B6CB0;
+  button {
+    background-color: #28a745;
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
     font-weight: bold;
-    font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out, transform 0.2s ease;
+    transition: background-color 0.2s ease;
   }
   
-  .avis-form button:hover {
-    background-color: #193e67;
-    transform: scale(1.05);
+  button:hover {
+    background-color: #1e7e34;
   }
   
+  /* Liste des avis */
+  .avis-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .avis {
+    background-color: #ffffff;
+    border-left: 5px solid #2b6cb0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
+  .avis .meta {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 8px;
+  }
+  
+  .avis p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      flex-direction: column; /* Changement ici */
+      align-items: center;
+      padding: 10px 0;
+    }
+  
+    .logo {
+      margin-bottom: 10px;
+    }
+  
+    .logo img {
+      width: 100px;
+      margin: 0 auto;
+    }
+  
+    .sidebar h2 {
+      display: none;
+    }
+  
+    .menu {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .boutonS {
+      text-decoration: none;
+      width: auto;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+  
+    .logout-button {
+      padding: 8px 12px;
+      margin-bottom: 10px;
+    }
+  
+    .content {
+      margin-left: 0;
+      padding: 20px;
+    }
+  
+    table {
+      font-size: 12px;
+    }
+  
+    .dashboard-container {
+      padding: 20px;
+      margin: 20px auto;
+    }
+  
+    canvas {
+      width: 100% !important;
+    }
+  }
