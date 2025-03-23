@@ -6,16 +6,18 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 require_once 'db.php';
 
-$input = json_decode(file_get_contents("php://input"), true);
-
-if (!isset($input["id"])) {
+if (!isset($_GET["ID"])) {
     echo json_encode(["error" => "ID manquant"]);
     exit;
 }
 
-$id = $input["id"];
+$id = (int)$_GET["ID"];
 
-$stmt = $pdo->prepare("DELETE FROM Eleves WHERE ID = ?");
-$stmt->execute([$id]);
+try {
+    $stmt = $pdo->prepare("DELETE FROM Eleves WHERE ID = ?");
+    $stmt->execute([$id]);
 
-echo json_encode(["success" => "Élève supprimé"]);
+    echo json_encode(["success" => "Élève supprimé"]);
+} catch (Exception $e) {
+    echo json_encode(["error" => "Erreur SQL : " . $e->getMessage()]);
+}
