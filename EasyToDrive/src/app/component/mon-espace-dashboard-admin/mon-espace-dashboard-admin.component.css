@@ -83,8 +83,8 @@ body {
 }
 
 /* ==== BOUTON AJOUT ==== */
-.add-btn {
-  background-color: #28a745;
+.add-btnE {
+  background-color: #28a745 !important;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -94,8 +94,8 @@ body {
   font-weight: bold;
 }
 
-.add-btn:hover {
-  background-color: #218838;
+.add-btnE:hover {
+  background-color: #1f7d35 !important;
 }
 
 /* ==== TABLE ==== */
