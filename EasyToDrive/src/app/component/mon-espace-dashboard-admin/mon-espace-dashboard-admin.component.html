@@ -181,17 +181,29 @@
     </div>
 
     <!-- Modale pour ajouter ou modifier une impression -->
-    <div class="modal" *ngIf="currentModal === 'addImpression' || currentModal === 'editImpression'">
-        <div class="modal-content">
-            <h2>{{ currentModal === 'editImpression' ? 'Modifier' : 'Ajouter' }} une impression</h2>
-            <input type="date" [(ngModel)]="nouvelleImpression.date" placeholder="Date" required>
-            <input type="text" [(ngModel)]="nouvelleImpression.numeroExamen" placeholder="Numéro Examen" required>
-            <input type="text" [(ngModel)]="nouvelleImpression.impression" placeholder="Impression" required>
-            <button (click)="currentModal === 'editImpression' ? validerModificationImpression() : validerAjoutImpression()">
-                {{ currentModal === 'editImpression' ? 'Sauvegarder' : 'Ajouter' }}
-            </button>
-            <button (click)="fermerModal()">❌ Annuler</button>
-        </div>
+<div class="modal" *ngIf="currentModal === 'addImpression' || currentModal === 'editImpression'">
+    <div class="modal-content">
+        <h2>{{ currentModal === 'editImpression' ? 'Modifier' : 'Ajouter' }} une impression</h2>
+        <input type="date" [(ngModel)]="nouvelleImpression.date" placeholder="Date" required>
+        <input type="text" [(ngModel)]="nouvelleImpression.numeroExamen" placeholder="Numéro Examen" required>
+        
+        <!-- Remplacement du champ texte par un menu déroulant -->
+        <select [(ngModel)]="nouvelleImpression.impression" required>
+            <option value="">Sélectionnez une impression</option>
+            <option value="Examen réussi avec aisance">Examen réussi avec aisance</option>
+            <option value="Bon">Bon</option>
+            <option value="Moyen">Moyen</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Passable">Passable</option>
+            <option value="Très bon">Très bon</option>
+            <option value="Médiocre">Médiocre</option>
+        </select>
+
+        <button (click)="currentModal === 'editImpression' ? validerModificationImpression() : validerAjoutImpression()">
+            {{ currentModal === 'editImpression' ? 'Sauvegarder' : 'Ajouter' }}
+        </button>
+        <button (click)="fermerModal()">❌ Annuler</button>
     </div>
+</div>
 </body>
 </html>

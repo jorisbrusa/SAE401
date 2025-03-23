@@ -16,6 +16,28 @@ export class MonEspaceDashboardComponent implements OnInit {
   notesCode: any[] = [];
   notesSimu: any[] = [];
   eleveID: number = 0;
+  moyenneCode: string = '0';
+  moyenneChartData: ChartData<'pie'> = {
+    labels: ['Moyenne', 'Écart max (sur 40)'],
+    datasets: [{
+      data: [0, 40],
+      backgroundColor: ['#2b6cb0', '#ddd'],
+      hoverOffset: 4
+    }]
+  };
+  moyenneChartOptions: ChartOptions<'pie'> = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'bottom'
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => `${context.label} : ${context.parsed}`
+        }
+      }
+    }
+  };
 
   // Graphique en barres pour les examens de code
   barChartData: ChartData<'bar'> = {
@@ -33,39 +55,33 @@ export class MonEspaceDashboardComponent implements OnInit {
     },
   };
 
-
-    // Pour les données
-    resultatsCode: { Date: string; Numero_Examen: string; Note: number }[] = [];
-    resultatsSimu: { Date: string; Numero_Examen: string; Impression: string }[] = [];
-
-    // Pour les graphiques
-    barChartType: any = 'bar';
-    barChartLegend = true;
-
-    pieChartType: any = 'pie';
-    pieChartLegend = true;
-
-
-  // Graphique en camembert pour les impressions des examens de simulation
-  pieChartData: ChartData<'pie'> = {
-    labels: [],
+  // Graphique en barres pour les impressions des examens de simulation
+  impressionBarChartData: ChartData<'bar'> = {
+    labels: [], // Les impressions seront les labels
     datasets: [
-      { data: [] }
+      { data: [], label: 'Nombre d\'impressions' }
     ],
   };
 
-  pieChartOptions: ChartOptions<'pie'> = {
+  impressionBarChartOptions: ChartOptions<'bar'> = {
     responsive: true,
     plugins: {
       legend: { position: 'top' },
       title: { display: true, text: 'Répartition des impressions des examens de simulation' },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          stepSize: 1, // Pour afficher des nombres entiers
+        },
+      },
     },
   };
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-
     this.eleveID = parseInt(localStorage.getItem('eleveID') || '0', 10);
     if (!this.eleveID) {
       console.error("Aucun ID d'élève trouvé.");
@@ -80,9 +96,28 @@ export class MonEspaceDashboardComponent implements OnInit {
           this.notesCode = Array.isArray(data.examen_code) ? data.examen_code : [];
           this.notesSimu = Array.isArray(data.examen_simu) ? data.examen_simu : [];
           this.updateChartData();
+          this.moyenneCode = this.calculerMoyenneCode();
+          this.updateMoyenneChartData();
         },
         error: (err) => console.error('Erreur lors de la récupération des notes', err),
       });
+  }
+
+  calculerMoyenneCode(): string {
+    if (!this.notesCode || this.notesCode.length === 0) return '0';
+    const total = this.notesCode.reduce((acc, note) => acc + Number(note.Note), 0);
+    return (total / this.notesCode.length).toFixed(2);
+  }
+
+  updateMoyenneChartData() {
+    this.moyenneChartData = {
+      labels: ['Moyenne', 'Écart max (sur 40)'],
+      datasets: [{
+        data: [parseFloat(this.moyenneCode), 40 - parseFloat(this.moyenneCode)],
+        backgroundColor: ['#2b6cb0', '#ddd'],
+        hoverOffset: 4
+      }]
+    };
   }
 
   updateChartData() {
@@ -97,10 +132,10 @@ export class MonEspaceDashboardComponent implements OnInit {
       ],
     };
 
-    // Graphique en camembert pour les impressions des examens de simulation
+    // Graphique en barres pour les impressions des examens de simulation
     const impressions = this.notesSimu
-      .map((exam) => exam.Impression) // Accédez à la propriété "Impression"
-      .filter((imp) => imp !== undefined && imp !== null); // Filtrez les valeurs undefined/null
+      .map((exam) => exam.Impression)
+      .filter((imp) => imp !== undefined && imp !== null);
 
     const impressionCounts: { [key: string]: number } = {};
     
@@ -108,15 +143,25 @@ export class MonEspaceDashboardComponent implements OnInit {
       impressionCounts[imp] = (impressionCounts[imp] || 0) + 1;
     });
 
-    console.log('Impression Counts:', impressionCounts); // Vérifiez les données dans la console
-    console.log('Labels:', Object.keys(impressionCounts)); // Vérifiez les labels
-    console.log('Data:', Object.values(impressionCounts)); // Vérifiez les données
-
-    this.pieChartData = {
-      labels: Object.keys(impressionCounts),
-      datasets: [{ data: Object.values(impressionCounts) }],
+    this.impressionBarChartData = {
+      labels: Object.keys(impressionCounts), // Les impressions (Examen réussi avec aisance, Bon, etc.)
+      datasets: [
+        {
+          data: Object.values(impressionCounts),
+          label: 'Impression',
+          backgroundColor: [
+            '#2b6cb0', // Couleur pour "Examen réussi avec aisance"
+            '#4caf50', // Couleur pour "Bon"
+            '#ffc107', // Couleur pour "Moyen"
+            '#f44336', // Couleur pour "Excellent"
+            '#9c27b0', // Couleur pour "Passable"
+            '#ff9800', // Couleur pour "Très bon"
+            '#607d8b', // Couleur pour "Médiocre"
+          ],
+        }
+      ],
     };
-}
+  }
 
   logout() {
     localStorage.removeItem('eleveID');

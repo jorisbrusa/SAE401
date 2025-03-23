@@ -12,9 +12,10 @@
     <button (click)="logout()" class="logout-button">🚪 Déconnexion</button>
 </div>
 
-<div class="avis-container">
+<div class="content">
+  <div class="avis-container">
     <h1>Laissez un avis ?</h1>
-  
+
     <form (ngSubmit)="envoyerAvis()" #avisForm="ngForm">
       <div class="avis-form">
         <h2>💬 Laisser un avis</h2>
@@ -23,4 +24,5 @@
         <button type="submit">Envoyer</button>
       </div>
     </form>
+  </div>
 </div>

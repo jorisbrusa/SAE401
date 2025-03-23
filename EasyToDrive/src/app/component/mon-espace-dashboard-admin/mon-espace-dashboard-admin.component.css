@@ -376,3 +376,22 @@ table {
     padding: 10px; /* Réduire le padding pour les écrans mobiles */
   }
 }
+
+
+
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+}
+
+select:focus {
+  border-color: #2b6cb0;
+  outline: none;
+  box-shadow: 0 0 5px rgba(43, 108, 176, 0.5);
+}
