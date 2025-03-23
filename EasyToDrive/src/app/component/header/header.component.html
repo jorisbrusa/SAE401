@@ -1,16 +1,20 @@
 <header>
-    <div class="container">
-      <div class="logo">
-        <!-- Remplacer src par le bon chemin de ton logo -->
-        <img src="assets/logo.png" alt="easy 2 drive" />
-        <span>Easy2Drive</span>
-      </div>
-      <nav>
-        <a routerLink="/accueil" routerLinkActive="active">Accueil</a>
-        <a routerLink="/faq" routerLinkActive="active">Avis</a>
-        <a routerLink="/contact" routerLinkActive="active">Contact</a>
-        <a routerLink="/mon-espace" routerLinkActive="active">Mon espace</a>
-      </nav>
-      
+  <div class="container">
+    <div class="logo">
+      <span>Easy2Drive</span>
+          <!-- Icône burger visible seulement en mobile -->
+    <div class="burger" (click)="toggleMenu()">
+      &#9776;
     </div>
-  </header>
+    </div>
+
+
+
+    <nav [class.open]="menuOuvert">
+      <a routerLink="/accueil" routerLinkActive="active" (click)="fermerMenu()">Accueil</a>
+      <a routerLink="/faq" routerLinkActive="active" (click)="fermerMenu()">Avis</a>
+      <a routerLink="/contact" routerLinkActive="active" (click)="fermerMenu()">Contact</a>
+      <a routerLink="/mon-espace" routerLinkActive="active" (click)="fermerMenu()">Mon espace</a>
+    </nav>
+  </div>
+</header>

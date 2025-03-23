@@ -137,3 +137,76 @@
     height: auto;
   }
   
+
+
+  @media (max-width: 768px) {
+    .sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      flex-direction: column; /* Changement ici */
+      align-items: center;
+      padding: 10px 0;
+    }
+  
+    .logo {
+      margin-bottom: 10px;
+    }
+  
+    .logo img {
+      width: 100px;
+      margin: 0 auto;
+    }
+  
+    .sidebar h2 {
+      display: none;
+    }
+  
+    .menu {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .boutonS {
+      width: auto;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+  
+    .logout-button {
+      padding: 8px 12px;
+      margin-bottom: 10px;
+    }
+  
+    .content {
+      margin-left: 0;
+      padding: 20px;
+    }
+  
+    table {
+      font-size: 12px;
+    }
+  
+    .dashboard-container {
+      padding: 20px;
+      margin: 20px auto;
+    }
+  
+    canvas {
+      width: 100% !important;
+    }
+  }
+  
+
+
+
+
+
+
+
+  

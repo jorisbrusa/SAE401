@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Easy 2 Drive</title>
-    <link rel="stylesheet" href="/mon-espace">
-</head>
-<body>
+<div class="page-wrapper">
     <div class="login-container">
-        <h2>Connexion Administrateur</h2>
-        <form (ngSubmit)="loginAdmin()" #adminForm="ngForm">
-            <label>Email :</label>
-            <input type="email" [(ngModel)]="email" name="email" required>
-            
-            <label>Mot de passe :</label>
-            <input type="password" [(ngModel)]="MDP" name="MDP" required>
-    
-            <button type="submit" [disabled]="adminForm.invalid" class="btn">Se connecter</button>
-        </form>
-    
-        <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-    </div>              
-</body>
-</html>
+      <h2>Connexion Administrateur</h2>
+      <form (ngSubmit)="loginAdmin()" #adminForm="ngForm">
+        <div class="input-group">
+          <label for="email">Email :</label>
+          <input id="email" type="email" [(ngModel)]="email" name="email" required>
+        </div>
+      
+        <div class="input-group">
+          <label for="MDP">Mot de passe :</label>
+          <input id="MDP" type="password" [(ngModel)]="MDP" name="MDP" required>
+        </div>
+      
+        <button type="submit" [disabled]="adminForm.invalid" class="btn">Se connecter</button>
+      </form>      
+  
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    </div>
+</div>

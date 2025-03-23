@@ -23,31 +23,30 @@
             <button class="add-btn" (click)="ouvrirModal('add')">Ajouter un élève</button>
         </div>
 
-        <div class="dashboard-container">
-            <h1>Gestion des élèves</h1>
+        <div class="table-responsive">
             <table>
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>NEPH</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let eleve of eleves">
-                        <td>{{ eleve.Nom }}</td>
-                        <td>{{ eleve.Prenom }}</td>
-                        <td>{{ eleve.NEPH_Email }}</td>
-                        <td>
-                            <button (click)="afficherDetails(eleve)">Voir détails</button>
-                            <button (click)="modifierEleve(eleve)">Modifier</button>
-                            <button (click)="supprimerEleve(eleve)">Supprimer</button>
-                        </td>
-                    </tr>
-                </tbody>
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Prénom</th>
+                  <th>NEPH</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let eleve of eleves">
+                  <td>{{ eleve.Nom }}</td>
+                  <td>{{ eleve.Prenom }}</td>
+                  <td>{{ eleve.NEPH_Email }}</td>
+                  <td>
+                    <button class="voir" (click)="afficherDetails(eleve)">Voir détails</button>
+                    <button class="modifier" (click)="modifierEleve(eleve)">Modifier</button>
+                    <button class="supprimer" (click)="supprimerEleve(eleve.ID)">Supprimer</button>
+                  </td>
+                </tr>
+              </tbody>
             </table>
-        </div>
+          </div>          
     </div>
 
     <!-- Modale pour ajouter ou modifier un élève -->

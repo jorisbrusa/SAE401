@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 body {
     background-color: #d2691e;
     font-family: 'Roboto', sans-serif;
@@ -10,22 +9,22 @@ body {
 
 
 main {
-    min-height: calc(100vh); /* Ajuste en fonction de la hauteur de ton header + footer */
+    min-height: calc(100vh); 
     padding: 20px;
     box-sizing: border-box;
 }
 
 
 :root {
-    --header-height: 90px; /* Tu peux changer la taille ici facilement */
+    --header-height: 90px; 
   }
   
 
-  /* Animation fade + slide légère */
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px); /* Décalage léger */
+        transform: translateY(20px); 
     }
     to {
         opacity: 1;
@@ -33,8 +32,12 @@ main {
     }
 }
 
-/* Classe globale pour appliquer cette animation */
+
 .page-content {
     animation: fadeInUp 0.6s ease-out;
-    animation-fill-mode: both; /* Pour garder l'état final */
+    animation-fill-mode: both; 
 }
+
+
+
+
